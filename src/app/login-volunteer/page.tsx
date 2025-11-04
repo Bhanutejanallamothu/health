@@ -28,7 +28,7 @@ export default function VolunteerLoginPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (username === 'volunteer' && password === 'volunteer') {
-      router.push('/admin');
+      router.push('/volunteer/dashboard');
     } else {
       toast({
         title: "Login Failed",
