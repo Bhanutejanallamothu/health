@@ -100,20 +100,20 @@
 
 .top:before {
   transform: rotate(45deg);
-  background: #e46569;
+  background: hsl(var(--accent));
 }
 .top:after {
   transform: rotate(135deg);
-  background: #ecaf81;
+  background: hsl(var(--primary));
 }
 
 .bottom:before {
   transform: rotate(-45deg);
-  background: #60b8d4;
+  background: hsl(var(--secondary));
 }
 .bottom:after {
   transform: rotate(-135deg);
-  background: #3745b5;
+  background: hsl(var(--primary) / 0.8);
 }
 
 .center {
