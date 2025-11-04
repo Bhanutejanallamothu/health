@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [isActive, setIsActive] = useState(false);
@@ -47,8 +48,11 @@ export default function Home() {
 
   return (
     <div
-      className="login-container min-h-screen font-sans"
-      onClick={() => setIsActive(!isActive)}
+      className={cn(
+        'login-container min-h-screen font-sans',
+        isActive && 'active'
+      )}
+      onClick={() => setIsActive(true)}
     >
       <div className="top"></div>
       <div className="bottom"></div>
