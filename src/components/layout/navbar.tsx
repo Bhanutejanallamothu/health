@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { AnimatedLogoutButton } from "./animated-logout-button";
+import './animated-logout-button.css';
 
 const navLinks = [
   { href: "/volunteer/dashboard", label: "Dashboard" },
@@ -47,9 +49,7 @@ export function Navbar() {
         {isAuthPage && (
           <>
             <div className="hidden md:flex items-center gap-2">
-              <Button asChild variant="outline" size="sm">
-                  <Link href="/">Logout</Link>
-              </Button>
+              <AnimatedLogoutButton />
             </div>
             <div className="md:hidden">
               <Sheet>
@@ -66,9 +66,9 @@ export function Navbar() {
                         {link.label}
                       </Link>
                     ))}
-                    <Button asChild variant="outline" className="mt-4">
-                      <Link href="/">Logout</Link>
-                    </Button>
+                    <div className="mt-4">
+                      <AnimatedLogoutButton />
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>
