@@ -3,6 +3,7 @@ import './globals.css';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster"
+import { HeartbeatBackground } from '@/components/layout/heartbeat-background';
 
 export const metadata: Metadata = {
   title: 'SWECHA Healthcare',
@@ -22,9 +23,10 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Nunito+Sans:wght@400&family=Inter:wght@500&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
+        <HeartbeatBackground />
         <div className="flex flex-col min-h-screen">
           <Navbar />
-          <main className="flex-grow bg-white">
+          <main className="flex-grow bg-transparent">
             {children}
           </main>
           <Footer />
