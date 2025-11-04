@@ -27,7 +27,7 @@ export function Navbar() {
     pathname.startsWith("/signup");
 
   return (
-    <header className="w-full p-4 bg-gradient-to-r from-teal-200 to-cyan-200">
+    <header className="w-full p-4 bg-primary/10">
       <div className="container flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Image
@@ -40,7 +40,7 @@ export function Navbar() {
         {!isLoginPage && (
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm font-medium text-gray-700 hover:text-primary">
+              <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground hover:text-primary">
                 {link.label}
               </Link>
             ))}
@@ -62,7 +62,7 @@ export function Navbar() {
                 <SheetContent side="right">
                   <div className="grid gap-4 py-6">
                     {navLinks.map((link) => (
-                      <Link key={link.href} href={link.href} className="text-lg font-medium text-gray-700 hover:text-primary">
+                      <Link key={link.href} href={link.href} className="text-lg font-medium text-muted-foreground hover:text-primary">
                         {link.label}
                       </Link>
                     ))}
