@@ -24,3 +24,9 @@ export type Patient = {
   gender: 'Male' | 'Female';
   area: string;
 };
+
+export type Doctor = {
+  id: string;
+  name: string;
+  specialty: string;
+};

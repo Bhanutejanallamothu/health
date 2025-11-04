@@ -1,4 +1,4 @@
-import type { Camp, Patient, Registration } from '@/lib/types';
+import type { Camp, Doctor, Patient, Registration } from '@/lib/types';
 
 export const camps: Camp[] = [
   {
@@ -85,4 +85,21 @@ export const patients: Patient[] = [
     gender: 'Male',
     area: 'Hyderabad',
   }
+];
+
+export const doctors: Doctor[] = [
+  { id: 'doc-1', name: 'Rama Rao', specialty: 'General Physician' },
+  { id: 'doc-2', name: 'Siva Ramulu', specialty: 'ENT' },
+  { id: 'doc-3', name: 'Prabhavathi', specialty: 'Gynec' },
+  { id: 'doc-4', name: 'Shailaja', specialty: 'Gynec' },
+  { id: 'doc-5', name: 'Somaraju', specialty: 'Pediatrician' },
+  { id: 'doc-6', name: 'Anshitha', specialty: 'Gen.physician' },
+  { id: 'doc-7', name: 'Prabavathi', specialty: 'Gynecologist' },
+  { id: 'doc-8', name: 'Dr. Dileep', specialty: 'G.Physician' },
+  { id: 'doc-9', name: 'Guest 1', specialty: 'General' },
+  { id: 'doc-10', name: 'Guest 2', specialty: 'General' },
+  { id: 'doc-11', name: 'Dr. Arun', specialty: 'Ortho' },
+  { id: 'doc-12', name: 'Dr. Bhargav', specialty: 'General Physician' },
+  { id: 'doc-13', name: 'Repeated', specialty: 'Repeated' },
+  { id: 'doc-14', name: 'Dr. Karan', specialty: 'Orthopedic' },
 ];
