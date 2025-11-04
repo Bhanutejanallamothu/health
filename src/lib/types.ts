@@ -15,3 +15,12 @@ export type Registration = {
   campLocation: string;
   medicalCondition: string;
 };
+
+export type Patient = {
+  bookNumber: string;
+  name: string;
+  phone: string;
+  age: number;
+  gender: 'Male' | 'Female';
+  area: string;
+};

@@ -1,4 +1,4 @@
-import type { Camp, Registration } from '@/lib/types';
+import type { Camp, Patient, Registration } from '@/lib/types';
 
 export const camps: Camp[] = [
   {
@@ -74,4 +74,15 @@ export const registrations: Registration[] = [
     campLocation: 'Maple Community Center',
     medicalCondition: 'Diabetes Type 2',
   },
+];
+
+export const patients: Patient[] = [
+  {
+    bookNumber: '12345',
+    name: 'Nik',
+    phone: '8390999999',
+    age: 25,
+    gender: 'Male',
+    area: 'Hyderabad',
+  }
 ];

@@ -26,6 +26,8 @@ import { useState } from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ArrowLeft } from 'lucide-react';
+import { patients } from '@/lib/placeholder-data';
+import type { Patient } from '@/lib/types';
 
 const bookNumberSchema = z.object({
   bookNumber: z.string().min(1, 'Book number is required.'),
@@ -47,6 +49,7 @@ export function PatientRegistrationForm() {
   const { toast } = useToast();
   const [patientData, setPatientData] = useState<PatientDetails | null>(null);
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [isExistingPatient, setIsExistingPatient] = useState(false);
 
   const bookNumberForm = useForm<z.infer<typeof bookNumberSchema>>({
     resolver: zodResolver(bookNumberSchema),
@@ -60,28 +63,44 @@ export function PatientRegistrationForm() {
   });
 
   function onBookNumberSubmit(values: z.infer<typeof bookNumberSchema>) {
-    console.log(values);
-    // Simulate fetching patient data
-    const mockData: PatientDetails = {
-      bookNumber: values.bookNumber,
-      name: 'Nik',
-      phone: '8390999999',
-      age: 25,
-      gender: 'Male',
-      area: 'Hyderabad',
-      tokenNumber: '1',
-    };
-    setPatientData(mockData);
-    patientDetailsForm.reset(mockData);
+    const existingPatient = patients.find(p => p.bookNumber === values.bookNumber);
+    const token = (Math.random() * 1000).toFixed(0);
+
+    if (existingPatient) {
+      const data = { ...existingPatient, tokenNumber: token };
+      setPatientData(data);
+      patientDetailsForm.reset(data);
+      setIsExistingPatient(true);
+    } else {
+      const newPatient: PatientDetails = {
+        bookNumber: values.bookNumber,
+        name: '',
+        phone: '',
+        age: 0,
+        gender: 'Male',
+        area: '',
+        tokenNumber: token,
+      };
+      setPatientData(newPatient);
+      patientDetailsForm.reset(newPatient);
+      setIsExistingPatient(false);
+    }
     setDataLoaded(true);
   }
 
   function onPatientDetailsSubmit(values: PatientDetails) {
     console.log(values);
-    toast({
-      title: 'Success',
-      description: `Patient ${values.name} has been registered.`,
-    });
+    if (isExistingPatient) {
+        toast({
+        title: 'Patient Updated',
+        description: `Patient ${values.name}'s data has been updated.`,
+        });
+    } else {
+        toast({
+        title: 'Patient Registered',
+        description: `Patient ${values.name} has been successfully registered.`,
+        });
+    }
     handleBack();
   }
 
@@ -89,6 +108,7 @@ export function PatientRegistrationForm() {
     setDataLoaded(false);
     setPatientData(null);
     bookNumberForm.reset();
+    setIsExistingPatient(false);
   }
 
   if (dataLoaded && patientData) {
@@ -107,9 +127,9 @@ export function PatientRegistrationForm() {
         <Form {...patientDetailsForm}>
           <form onSubmit={patientDetailsForm.handleSubmit(onPatientDetailsSubmit)}>
             <CardContent className="space-y-4">
-               <Alert variant="default" className="bg-green-100 border-green-200 text-green-800">
+               <Alert variant="default" className={isExistingPatient ? "bg-blue-100 border-blue-200 text-blue-800" : "bg-green-100 border-green-200 text-green-800"}>
                   <AlertDescription>
-                    Patient data loaded successfully!
+                    {isExistingPatient ? 'Existing patient data loaded successfully!' : 'New patient. Please fill the details.'}
                   </AlertDescription>
               </Alert>
               <FormField
@@ -158,7 +178,7 @@ export function PatientRegistrationForm() {
                   <FormItem>
                     <FormLabel>Age *</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="Enter age" {...field} />
+                      <Input type="number" placeholder="Enter age" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -223,7 +243,7 @@ export function PatientRegistrationForm() {
             </CardContent>
             <CardFooter>
               <Button type="submit" className="w-full bg-gray-800 text-white hover:bg-gray-900">
-                Save
+                {isExistingPatient ? 'Update' : 'Save'}
               </Button>
             </CardFooter>
           </form>
