@@ -1,0 +1,17 @@
+export type Camp = {
+  id: string;
+  location: string;
+  date: string;
+};
+
+export type Registration = {
+  id: string;
+  name: string;
+  age: number;
+  gender: 'Male' | 'Female' | 'Other';
+  phone: string;
+  email: string;
+  address: string;
+  campLocation: string;
+  medicalCondition: string;
+};
