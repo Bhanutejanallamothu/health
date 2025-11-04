@@ -5,8 +5,8 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'HealthReach',
-  description: 'Community healthcare support by Medical Camp',
+  title: 'SWECHA Healthcare',
+  description: 'Community healthcare support',
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <div className="flex flex-col min-h-screen">
           <Navbar />
-          <main className="flex-grow bg-background">
+          <main className="flex-grow bg-white">
             {children}
           </main>
           <Footer />
