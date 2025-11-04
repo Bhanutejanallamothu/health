@@ -19,29 +19,217 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { ArrowLeft } from 'lucide-react';
 
-const formSchema = z.object({
+const bookNumberSchema = z.object({
   bookNumber: z.string().min(1, 'Book number is required.'),
 });
 
+const patientDetailsSchema = z.object({
+  bookNumber: z.string(),
+  name: z.string().min(1, 'Name is required.'),
+  phone: z.string().min(10, 'Phone number is required.'),
+  age: z.coerce.number().positive('Age must be a positive number.'),
+  gender: z.enum(['Male', 'Female']),
+  area: z.string().min(1, 'Area is required.'),
+  tokenNumber: z.string(),
+});
+
+type PatientDetails = z.infer<typeof patientDetailsSchema>;
+
 export function PatientRegistrationForm() {
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [patientData, setPatientData] = useState<PatientDetails | null>(null);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const bookNumberForm = useForm<z.infer<typeof bookNumberSchema>>({
+    resolver: zodResolver(bookNumberSchema),
     defaultValues: {
       bookNumber: '',
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const patientDetailsForm = useForm<PatientDetails>({
+    resolver: zodResolver(patientDetailsSchema),
+  });
+
+  function onBookNumberSubmit(values: z.infer<typeof bookNumberSchema>) {
+    console.log(values);
+    // Simulate fetching patient data
+    const mockData: PatientDetails = {
+      bookNumber: values.bookNumber,
+      name: 'Nik',
+      phone: '8390999999',
+      age: 25,
+      gender: 'Male',
+      area: 'Hyderabad',
+      tokenNumber: '1',
+    };
+    setPatientData(mockData);
+    patientDetailsForm.reset(mockData);
+    setDataLoaded(true);
+  }
+
+  function onPatientDetailsSubmit(values: PatientDetails) {
     console.log(values);
     toast({
       title: 'Success',
-      description: `Registration submitted for book number: ${values.bookNumber}`,
+      description: `Patient ${values.name} has been registered.`,
     });
-    form.reset();
+    handleBack();
+  }
+
+  function handleBack() {
+    setDataLoaded(false);
+    setPatientData(null);
+    bookNumberForm.reset();
+  }
+
+  if (dataLoaded && patientData) {
+    return (
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <div className="relative flex items-center justify-center">
+            <Button variant="ghost" size="icon" className="absolute left-0" onClick={handleBack}>
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+            <CardTitle className="text-2xl font-bold text-center">
+              Patient Registration
+            </CardTitle>
+          </div>
+        </CardHeader>
+        <Form {...patientDetailsForm}>
+          <form onSubmit={patientDetailsForm.handleSubmit(onPatientDetailsSubmit)}>
+            <CardContent className="space-y-4">
+               <Alert variant="default" className="bg-green-100 border-green-200 text-green-800">
+                  <AlertDescription>
+                    Patient data loaded successfully!
+                  </AlertDescription>
+              </Alert>
+              <FormField
+                control={patientDetailsForm.control}
+                name="bookNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Book Number</FormLabel>
+                    <FormControl>
+                      <Input {...field} disabled />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={patientDetailsForm.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter patient name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={patientDetailsForm.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter phone number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={patientDetailsForm.control}
+                name="age"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Age *</FormLabel>
+                    <FormControl>
+                      <Input type="number" placeholder="Enter age" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={patientDetailsForm.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Gender</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex items-center space-x-4"
+                      >
+                        <FormItem className="flex items-center space-x-2 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="Male" />
+                          </FormControl>
+                          <FormLabel className="font-normal">Male</FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-2 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="Female" />
+                          </FormControl>
+                          <FormLabel className="font-normal">Female</FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={patientDetailsForm.control}
+                name="area"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Area *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter area" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+               <FormField
+                control={patientDetailsForm.control}
+                name="tokenNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Token Number</FormLabel>
+                    <FormControl>
+                      <Input {...field} disabled />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </CardContent>
+            <CardFooter>
+              <Button type="submit" className="w-full bg-gray-800 text-white hover:bg-gray-900">
+                Save
+              </Button>
+            </CardFooter>
+          </form>
+        </Form>
+      </Card>
+    );
   }
 
   return (
@@ -51,11 +239,11 @@ export function PatientRegistrationForm() {
           Patient Registration
         </CardTitle>
       </CardHeader>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <Form {...bookNumberForm}>
+        <form onSubmit={bookNumberForm.handleSubmit(onBookNumberSubmit)}>
           <CardContent>
             <FormField
-              control={form.control}
+              control={bookNumberForm.control}
               name="bookNumber"
               render={({ field }) => (
                 <FormItem>
@@ -68,11 +256,11 @@ export function PatientRegistrationForm() {
               )}
             />
           </CardContent>
-          <div className="px-6 pb-6">
-            <Button type="submit" className="w-full bg-gray-800 hover:bg-gray-900 text-white">
+          <CardFooter>
+            <Button type="submit" className="w-full">
               Submit
             </Button>
-          </div>
+          </CardFooter>
         </form>
       </Form>
     </Card>
