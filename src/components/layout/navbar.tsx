@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ import { Menu } from "lucide-react";
 const navLinks = [
   { href: "/volunteer/dashboard", label: "Dashboard" },
   { href: "/volunteer/patient-registration", label: "Patient Registration" },
-  { href: "#", label: "View Queues" },
+  { href: "/volunteer/view-queues", label: "View Queues" },
 ];
 
 export function Navbar() {
