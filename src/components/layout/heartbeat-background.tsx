@@ -6,17 +6,17 @@ import { useEffect, useState } from 'react';
 
 export function HeartbeatBackground() {
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(false);
-
-  const isAuthPage = pathname.startsWith('/volunteer') || pathname.startsWith('/admin');
+  const [isAuthPage, setIsAuthPage] = useState(false);
 
   useEffect(() => {
-    setIsVisible(isAuthPage);
-  }, [isAuthPage]);
+    setIsAuthPage(pathname.startsWith('/volunteer') || pathname.startsWith('/admin'));
+  }, [pathname]);
+
+  if (!isAuthPage) return null;
 
   return (
-    <div className={cn('heartbeat-bg', isVisible && 'visible')}>
-      <svg className="heart" viewBox="0 0 32 32" width="32px" height="32px" role="img" aria-label="Heart beating with red lines running down the outside and veins inside">
+    <div className={cn('heartbeat-bg visible')}>
+        <svg className="heart" viewBox="0 0 32 32" width="32px" height="32px" role="img" aria-label="Heart beating with red lines running down the outside and veins inside">
         <symbol id="heart-border">
             <path d="M 15.9 7.75 C 15.9 7.75 11.639 2.996 6.785 5.85 C 4.652 7.105 2.992 9.667 3 12.5 C 3.017 18.716 7.878 22.041 9.5 23.547 C 14.398 27.547 16.088 27.5 16 27.5" strokeDasharray="39 39" />
         </symbol>
