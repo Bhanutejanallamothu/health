@@ -21,7 +21,7 @@ import Link from "next/link";
 const dashboardItems = [
   { icon: UserPlus, label: "Patient Registration", number: 1, href: "/volunteer/patient-registration" },
   { icon: UserCheck, label: "Doctor assigning", number: 2, href: "/volunteer/doctor-assigning" },
-  { icon: HeartPulse, label: "Vitals", number: 3, href: "#" },
+  { icon: HeartPulse, label: "Vitals", number: 3, href: "/volunteer/vitals" },
   { icon: ClipboardPenLine, label: "Doctor Prescription", number: 4, href: "#" },
   { icon: Pill, label: "Medicine Verification", number: 5, href: "#" },
   { icon: Search, label: "Patient Status", number: 6, href: "#" },
