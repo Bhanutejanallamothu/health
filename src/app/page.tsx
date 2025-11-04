@@ -52,7 +52,7 @@ export default function Home() {
         'login-container min-h-screen font-sans',
         isActive && 'active'
       )}
-      onClick={() => setIsActive(true)}
+      onMouseEnter={() => setIsActive(true)}
     >
       <div className="top"></div>
       <div className="bottom"></div>
