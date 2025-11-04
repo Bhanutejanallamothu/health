@@ -25,7 +25,7 @@ const dashboardItems = [
   { icon: ClipboardPenLine, label: "Doctor Prescription", number: 4, href: "/volunteer/doctor-prescription" },
   { icon: Pill, label: "Medicine Verification", number: 5, href: "/volunteer/medicine-verification" },
   { icon: Search, label: "Patient Status", number: 6, href: "/volunteer/patient-status" },
-  { icon: Users, label: "Counselling", number: 7, href: "#" },
+  { icon: Users, label: "Counselling", number: 7, href: "/volunteer/counselling" },
   { icon: FlaskConical, label: "Lab", number: 8, href: "#" },
   { icon: Shield, label: "Patient Support", number: 9, href: "#" },
   { icon: Ticket, label: "Token Generation", number: 10, href: "#" },
