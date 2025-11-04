@@ -56,8 +56,8 @@ export default function Home() {
     >
       <div className="top"></div>
       <div className="bottom"></div>
-      <div className="center flex flex-col items-center justify-center bg-white rounded-lg shadow-2xl p-8">
-        <h2 className="text-3xl font-bold mb-6 text-gray-800">
+      <div className="center flex flex-col items-center justify-center bg-card rounded-lg shadow-2xl p-8" onClick={(e) => e.stopPropagation()}>
+        <h2 className="text-3xl font-bold mb-6 text-card-foreground">
           SWECHA Healthcare
         </h2>
         <Input
@@ -66,7 +66,6 @@ export default function Home() {
           className="w-full p-4 mb-4"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          onClick={(e) => e.stopPropagation()}
         />
         <Input
           type="password"
@@ -74,11 +73,9 @@ export default function Home() {
           className="w-full p-4 mb-6"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          onClick={(e) => e.stopPropagation()}
         />
         <div
           className="flex gap-4 w-full"
-          onClick={(e) => e.stopPropagation()}
         >
           <Button
             className="w-full"
@@ -94,7 +91,7 @@ export default function Home() {
             Admin Login
           </Button>
         </div>
-         <p className="text-sm text-muted-foreground mt-6" onClick={(e) => e.stopPropagation()}>
+         <p className="text-sm text-muted-foreground mt-6">
             New to volunteering?{' '}
             <Link href="/login-volunteer" className="font-semibold text-primary hover:underline">
               Sign up

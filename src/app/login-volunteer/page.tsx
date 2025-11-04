@@ -50,8 +50,8 @@ export default function VolunteerLoginPage() {
     >
         <div className="top"></div>
         <div className="bottom"></div>
-        <div onClick={(e) => e.stopPropagation()} className="center flex flex-col items-center justify-center bg-white rounded-lg shadow-2xl p-8 w-[400px]">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">
+        <div onClick={(e) => e.stopPropagation()} className="center flex flex-col items-center justify-center bg-card rounded-lg shadow-2xl p-8 w-[400px]">
+            <h2 className="text-3xl font-bold mb-6 text-card-foreground">
                 Volunteer Signup
             </h2>
             <form onSubmit={handleLogin} className="w-full">
