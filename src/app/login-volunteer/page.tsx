@@ -43,7 +43,7 @@ export default function VolunteerLoginPage() {
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
-            Volunteer Login
+            Volunteer Signup
           </CardTitle>
         </CardHeader>
         <form onSubmit={handleLogin}>
@@ -87,7 +87,7 @@ export default function VolunteerLoginPage() {
               </Button>
             </div>
             <Button type="submit" className="w-full">
-              Login
+              Sign Up
             </Button>
           </CardContent>
         </form>
@@ -98,9 +98,9 @@ export default function VolunteerLoginPage() {
                 </Link>
             </p>
             <p className="text-sm text-muted-foreground">
-                New to volunteering?{" "}
-                <Link href="/signup" className="font-semibold text-primary hover:underline">
-                Sign up
+                Already have an account?{" "}
+                <Link href="/" className="font-semibold text-primary hover:underline">
+                Login
                 </Link>
             </p>
         </CardFooter>

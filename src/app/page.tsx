@@ -92,7 +92,7 @@ export default function Home() {
         </div>
          <p className="text-sm text-muted-foreground mt-6" onClick={(e) => e.stopPropagation()}>
             New to volunteering?{' '}
-            <Link href="#" className="font-semibold text-primary hover:underline">
+            <Link href="/login-volunteer" className="font-semibold text-primary hover:underline">
               Sign up
             </Link>
           </p>
