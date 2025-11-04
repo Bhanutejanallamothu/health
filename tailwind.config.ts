@@ -10,8 +10,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['PT Sans', 'sans-serif'],
+        body: ['"Nunito Sans"', 'sans-serif'],
         headline: ['Poppins', 'sans-serif'],
+        accent: ['Inter', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
