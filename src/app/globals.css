@@ -59,6 +59,11 @@
   }
 }
 
+/* Ensure the Next.js not-found wrapper is a flex container that centers its content */
+body > div[class*="__next_not-found__"] {
+  @apply flex flex-col items-center justify-center min-h-screen;
+}
+
 @layer components {
   .card {
     @apply backdrop-blur-lg;
