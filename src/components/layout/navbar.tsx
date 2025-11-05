@@ -4,14 +4,23 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, LogOut, LayoutGrid, User } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { AnimatedLogoutButton } from "./animated-logout-button";
-import './animated-logout-button.css';
 import { useState, useEffect, useMemo } from "react";
+import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 
 const navLinks = [
-  { href: "/volunteer/dashboard", label: "Dashboard" },
+  { href: "/volunteer/dashboard", label: "Dashboard", icon: LayoutGrid },
   { href: "/volunteer/patient-registration", label: "Patient Registration" },
   { href: "/volunteer/view-queues", label: "View Queues" },
 ];
@@ -25,60 +34,97 @@ export function Navbar() {
   }, []);
 
   const isLoginPage = useMemo(() => pathname === "/" || pathname.startsWith("/login") || pathname.startsWith("/signup"), [pathname]);
-  const isAuthPage = useMemo(() => pathname.startsWith("/volunteer") || pathname.startsWith("/admin"), [pathname]);
 
   if (!isClient || isLoginPage) {
     return null;
   }
   
   return (
-    <header className="sticky top-0 z-50 p-4">
-      <div className="container flex h-14 items-center justify-between rounded-lg border border-border/60 bg-card/60 px-6 shadow-lg backdrop-blur-lg">
-        <Link href="/" className="flex items-center space-x-2">
-          <Image
-            src="https://swecha.org/sites/default/files/2021-05/Swecha.png"
-            alt="Swecha Logo"
-            width={124}
-            height={41}
-          />
-        </Link>
-        <div className="flex items-center gap-4">
-            <nav className="hidden md:flex items-center gap-6">
+    <header className="sticky top-4 z-50 w-full px-4">
+      <div className="container flex h-14 items-center justify-between rounded-full border border-border/60 bg-background/60 p-2 px-3 shadow-lg backdrop-blur-lg">
+        <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2 shrink-0">
+              <Image
+                src="https://swecha.org/sites/default/files/2021-05/Swecha.png"
+                alt="Swecha Logo"
+                width={100}
+                height={32}
+                className="w-auto h-8"
+              />
+            </Link>
+            <div className="w-px h-6 bg-border/80 mx-2 hidden md:block" />
+            <nav className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground hover:text-primary">
+                <Link 
+                    key={link.href} 
+                    href={link.href} 
+                    className={cn(
+                        "flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+                        pathname === link.href && "bg-primary text-primary-foreground"
+                    )}
+                >
+                  {link.icon && <link.icon className="h-4 w-4" />}
                   {link.label}
                 </Link>
               ))}
             </nav>
-          {isAuthPage && (
-            <>
-              <div className="hidden md:flex items-center gap-2">
-                <AnimatedLogoutButton />
-              </div>
-              <div className="md:hidden">
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <Menu className="h-6 w-6" />
-                      <span className="sr-only">Toggle navigation menu</span>
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent side="right">
-                    <div className="grid gap-4 py-6">
-                      {navLinks.map((link) => (
-                        <Link key={link.href} href={link.href} className="text-lg font-medium text-muted-foreground hover:text-primary">
-                          {link.label}
-                        </Link>
-                      ))}
-                      <div className="mt-4">
-                        <AnimatedLogoutButton />
-                      </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-2">
+               <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src="https://picsum.photos/seed/user/40/40" alt="user" data-ai-hint="user avatar" />
+                      <AvatarFallback>U</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">Volunteer</p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        volunteer@healthreach.org
+                      </p>
                     </div>
-                  </SheetContent>
-                </Sheet>
-              </div>
-            </>
-          )}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                     <Link href="/">
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Log out</span>
+                      </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <div className="md:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Menu className="h-6 w-6" />
+                    <span className="sr-only">Toggle navigation menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <div className="grid gap-4 py-6">
+                    {navLinks.map((link) => (
+                      <Link key={link.href} href={link.href} className="text-lg font-medium text-muted-foreground hover:text-primary">
+                        {link.label}
+                      </Link>
+                    ))}
+                    <div className="mt-4">
+                      <Link href="/" className="flex items-center text-lg font-medium text-muted-foreground hover:text-primary">
+                        <LogOut className="mr-2 h-5 w-5" />
+                        <span>Log out</span>
+                      </Link>
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
         </div>
       </div>
     </header>
