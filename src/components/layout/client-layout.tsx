@@ -8,11 +8,10 @@ import { LowPolyHeartBackground } from './low-poly-heart-background';
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAuthPage = pathname.startsWith('/volunteer') || pathname.startsWith('/admin');
 
   return (
       <div className="flex flex-col min-h-screen">
-        {isAuthPage && <LowPolyHeartBackground />}
+        <LowPolyHeartBackground />
         <Navbar />
         <main className="flex-grow flex flex-col bg-transparent">
           <div className="relative">
