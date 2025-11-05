@@ -36,7 +36,7 @@ export function Navbar() {
       <div className="container flex h-14 items-center justify-between rounded-lg border border-border/60 bg-card/60 px-6 shadow-lg backdrop-blur-lg">
         <Link href="/" className="flex items-center space-x-2">
           <Image
-            src="https://swecha.org/sites/default/files/Swecha-Telangana-Logo-124w.png"
+            src="https://swecha.org/sites/default/files/2021-05/Swecha.png"
             alt="Swecha Logo"
             width={124}
             height={41}
