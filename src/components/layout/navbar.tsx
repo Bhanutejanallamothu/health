@@ -4,7 +4,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, LogOut, LayoutGrid } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useMemo } from "react";
@@ -26,7 +26,7 @@ export function Navbar() {
     setIsClient(true);
   }, []);
 
-  const isLoginPage = useMemo(() => pathname === "/" || pathname.startsWith("/login") || pathname.startsWith("/signup"), [pathname]);
+  const isLoginPage = useMemo(() => pathname === "/", [pathname]);
 
   if (!isClient || isLoginPage) {
     return null;
@@ -78,6 +78,12 @@ export function Navbar() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right">
+                  <SheetHeader>
+                    <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
+                    <SheetDescription className="sr-only">
+                      A list of links to navigate the application.
+                    </SheetDescription>
+                  </SheetHeader>
                   <div className="grid gap-4 py-6">
                     {navLinks.map((link) => (
                       <Link key={link.href} href={link.href} className="text-lg font-medium text-muted-foreground hover:text-primary">
