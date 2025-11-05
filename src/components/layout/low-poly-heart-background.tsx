@@ -7,21 +7,18 @@ import { useEffect, useState } from 'react';
 import './low-poly-heart.css';
 
 export function LowPolyHeartBackground() {
-  const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const isAuthPage = pathname.startsWith('/volunteer') || pathname.startsWith('/admin');
-
   if (!isClient) {
     return null;
   }
 
   return (
-    <div className={cn('low-poly-heart-bg', isAuthPage && 'visible' )}>
+    <div className={cn('low-poly-heart-bg visible' )}>
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 1194.13477 1200" style={{enableBackground:"new 0 0 1194.13477 1200"}} xmlSpace="preserve">
 
