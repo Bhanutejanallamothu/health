@@ -8,7 +8,7 @@ import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { AnimatedLogoutButton } from "./animated-logout-button";
 import './animated-logout-button.css';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const navLinks = [
   { href: "/volunteer/dashboard", label: "Dashboard" },
@@ -24,19 +24,13 @@ export function Navbar() {
     setIsClient(true);
   }, []);
 
+  const isLoginPage = useMemo(() => pathname === "/" || pathname.startsWith("/login") || pathname.startsWith("/signup"), [pathname]);
+  const isAuthPage = useMemo(() => pathname.startsWith("/volunteer") || pathname.startsWith("/admin"), [pathname]);
 
-  if (!isClient) {
+  if (!isClient || isLoginPage) {
     return null;
   }
   
-  const isLoginPage = pathname === "/" || pathname.startsWith("/login") || pathname.startsWith("/signup");
-  const isAuthPage = pathname.startsWith("/volunteer") || pathname.startsWith("/admin");
-
-
-  if (isLoginPage) {
-    return null;
-  }
-
   return (
     <header className="sticky top-0 z-50 p-4">
       <div className="container flex h-14 items-center justify-between rounded-lg border border-border/60 bg-card/60 px-6 shadow-lg backdrop-blur-lg">
