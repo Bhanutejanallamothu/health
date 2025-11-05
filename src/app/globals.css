@@ -23,6 +23,7 @@
     --border: 220 20% 85%;
     --input: 220 20% 85%;
     --ring: 233 58% 52%;
+    --radius: 0.5rem;
   }
 }
 
@@ -118,7 +119,7 @@
   width: 100%;
   padding: 15px;
   margin: 5px;
-  border-radius: 1px;
+  border-radius: var(--radius);
   border: 1px solid hsl(var(--border));
   font-family: inherit;
   background-color: hsl(var(--background));
