@@ -1,4 +1,3 @@
-
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -8,22 +7,17 @@ import './low-poly-heart.css';
 
 export function LowPolyHeartBackground() {
   const pathname = usePathname();
-  const [isAuthPage, setIsAuthPage] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    if (isClient) {
-      setIsAuthPage(pathname.startsWith('/volunteer') || pathname.startsWith('/admin'));
-    }
-  }, [pathname, isClient]);
-
   if (!isClient) {
     return null;
   }
+
+  const isAuthPage = pathname.startsWith('/volunteer') || pathname.startsWith('/admin');
 
   return (
     <div className={cn('low-poly-heart-bg', isAuthPage && 'visible' )}>

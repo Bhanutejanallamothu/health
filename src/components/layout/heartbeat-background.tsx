@@ -6,11 +6,17 @@ import { useEffect, useState } from 'react';
 
 export function HeartbeatBackground() {
   const pathname = usePathname();
-  const [isAuthPage, setIsAuthPage] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsAuthPage(pathname.startsWith('/volunteer') || pathname.startsWith('/admin'));
-  }, [pathname]);
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
+  const isAuthPage = pathname.startsWith('/volunteer') || pathname.startsWith('/admin');
 
   if (!isAuthPage) return null;
 
