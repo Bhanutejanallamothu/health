@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from "next/link";
@@ -9,6 +8,7 @@ import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { AnimatedLogoutButton } from "./animated-logout-button";
 import './animated-logout-button.css';
+import { useMemo } from "react";
 
 const navLinks = [
   { href: "/volunteer/dashboard", label: "Dashboard" },
@@ -19,12 +19,18 @@ const navLinks = [
 export function Navbar() {
   const pathname = usePathname();
 
-  const isAuthPage =
-    pathname.startsWith("/volunteer") || pathname.startsWith("/admin");
-  const isLoginPage =
-    pathname === "/" ||
-    pathname.startsWith("/login") ||
-    pathname.startsWith("/signup");
+  const isAuthPage = useMemo(
+    () => pathname.startsWith("/volunteer") || pathname.startsWith("/admin"),
+    [pathname]
+  );
+  
+  const isLoginPage = useMemo(
+    () =>
+      pathname === "/" ||
+      pathname.startsWith("/login") ||
+      pathname.startsWith("/signup"),
+    [pathname]
+  );
 
   if (isLoginPage) {
     return null; // Don't show navbar on login pages
