@@ -41,15 +41,15 @@ export function Navbar() {
   
   return (
     <header className="sticky top-4 z-50 w-full px-4 flex justify-center">
-      <div className="flex h-14 items-center rounded-full border border-border/60 bg-background/60 p-2 px-8 shadow-lg backdrop-blur-lg gap-2">
+      <div className="flex h-16 items-center rounded-full border border-border/60 bg-background/60 p-2 px-8 shadow-lg backdrop-blur-lg gap-2">
         <div className="flex items-center gap-2 shrink-0">
             <Link href="/" className="flex items-center gap-2 shrink-0">
               <Image
                 src="https://swecha.org/sites/default/files/2021-05/Swecha.png"
                 alt="Swecha Logo"
-                width={100}
-                height={32}
-                className="w-auto h-8"
+                width={120}
+                height={38}
+                className="w-auto h-10"
               />
             </Link>
         </div>
