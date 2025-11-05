@@ -107,8 +107,8 @@ export default function VolunteerLoginPage() {
                 </p>
                 <p className="text-sm text-muted-foreground">
                     Don't have an account?{" "}
-                    <Link href="/login-volunteer" className="font-semibold text-primary hover:underline">
-                    Sign up
+                    <Link href="/" className="font-semibold text-primary hover:underline">
+                      Sign up
                     </Link>
                 </p>
             </div>

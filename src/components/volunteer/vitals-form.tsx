@@ -70,7 +70,7 @@ export function VitalsForm() {
               control={form.control}
               name="bookNumber"
               render={({ field }) => (
-                <FormItem>
+                <FormItem key={field.name}>
                   <FormLabel>Book Number</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter patient book number" {...field} />
@@ -83,7 +83,7 @@ export function VitalsForm() {
               control={form.control}
               name="bp"
               render={({ field }) => (
-                <FormItem>
+                <FormItem key={field.name}>
                   <FormLabel>BP (systolic/diastolic)</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g., 120/80" {...field} />
@@ -96,7 +96,7 @@ export function VitalsForm() {
               control={form.control}
               name="pulse"
               render={({ field }) => (
-                <FormItem>
+                <FormItem key={field.name}>
                   <FormLabel>Pulse</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g., 72" {...field} />
@@ -109,7 +109,7 @@ export function VitalsForm() {
               control={form.control}
               name="rbs"
               render={({ field }) => (
-                <FormItem>
+                <FormItem key={field.name}>
                   <FormLabel>RBS</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g., 90" {...field} />
@@ -122,7 +122,7 @@ export function VitalsForm() {
               control={form.control}
               name="weight"
               render={({ field }) => (
-                <FormItem>
+                <FormItem key={field.name}>
                   <FormLabel>Weight (kg)</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="e.g., 70" {...field} />
@@ -135,7 +135,7 @@ export function VitalsForm() {
               control={form.control}
               name="height"
               render={({ field }) => (
-                <FormItem>
+                <FormItem key={field.name}>
                   <FormLabel>Height (cm)</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="e.g., 175" {...field} />
@@ -148,7 +148,7 @@ export function VitalsForm() {
               control={form.control}
               name="lastMealTime"
               render={({ field }) => (
-                <FormItem>
+                <FormItem key={field.name}>
                   <FormLabel>Last Meal and Time</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g., Breakfast, 8:00 AM" {...field} />
