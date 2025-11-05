@@ -9,22 +9,20 @@ export default function NotFound() {
   return (
     <>
       <LowPolyHeartBackground />
-      <div className="z-10">
-        <Card className="w-full max-w-md text-center bg-card/80 backdrop-blur-sm">
-          <CardHeader>
-            <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
-                <TriangleAlert className="h-12 w-12 text-primary" />
-            </div>
-            <CardTitle className="text-3xl font-bold mt-4">404 - Page Not Found</CardTitle>
-            <CardDescription>The page you are looking for does not exist or has not been implemented yet.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button asChild>
-              <Link href="/volunteer/dashboard">Return to Dashboard</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+      <Card className="w-full max-w-md text-center bg-card/80 backdrop-blur-sm z-10">
+        <CardHeader>
+          <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
+              <TriangleAlert className="h-12 w-12 text-primary" />
+          </div>
+          <CardTitle className="text-3xl font-bold mt-4">404 - Page Not Found</CardTitle>
+          <CardDescription>The page you are looking for does not exist or has not been implemented yet.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button asChild>
+            <Link href="/volunteer/dashboard">Return to Dashboard</Link>
+          </Button>
+        </CardContent>
+      </Card>
     </>
   );
 }
