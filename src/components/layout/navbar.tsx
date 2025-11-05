@@ -9,7 +9,6 @@ import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { AnimatedLogoutButton } from "./animated-logout-button";
 import './animated-logout-button.css';
-import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
   { href: "/volunteer/dashboard", label: "Dashboard" },
@@ -48,7 +47,6 @@ export function Navbar() {
               ))}
             </nav>
           )}
-          <ThemeToggle />
           {isAuthPage && (
             <>
               <div className="hidden md:flex items-center gap-2">
