@@ -14,7 +14,7 @@ export function HoverLightEffect({ children, className, borderRadius = '0.75rem'
       style={{ borderRadius }}
       className={cn(
         "relative overflow-hidden group transition-all duration-300",
-        "hover:shadow-[0_0_20px_5px_hsl(var(--accent)/0.5)]",
+        "hover:shadow-[0_0_15px_2px_hsl(var(--accent)/0.4)]",
         className
       )}
     >
