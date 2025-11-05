@@ -8,6 +8,7 @@
   top: 0;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+  background-color: hsl(90 35% 95%);
 }
 
 .low-poly-heart-bg.visible {
@@ -324,7 +325,7 @@
 	.st298{fill:#B33D50;}
 	.st299{fill:#72101B;}
 	.st300{fill:#9C1221;}
-	.st301{fill:#371B1B;}
+	.st301{fill:transparent;}
 	.st302{fill:#AB1D29;}
 	.st303{fill:#541017;}
 	.st304{fill:#D73340;}
@@ -525,4 +526,3 @@
   transform: scale(1.1);
   animation: fill-ani 2s ease-in 3s backwards;
 }
-
