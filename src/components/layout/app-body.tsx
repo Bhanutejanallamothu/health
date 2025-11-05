@@ -1,11 +1,9 @@
-'use client';
 
-import { HeartbeatBackground } from './heartbeat-background';
+'use client';
 
 export function AppBody({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative">
-      <HeartbeatBackground />
       <div className="relative z-10">{children}</div>
     </div>
   );
