@@ -8,7 +8,6 @@
   top: 0;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
-  background-color: hsl(90 35% 95%);
 }
 
 .low-poly-heart-bg.visible {
