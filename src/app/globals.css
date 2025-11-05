@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    --background: 220 40% 97%;
-    --foreground: 224 76% 12%;
-    --card: 220 40% 97% / 0.6;
-    --card-foreground: 224 76% 12%;
-    --popover: 220 40% 97% / 0.8;
-    --popover-foreground: 224 76% 12%;
+    --background: 240 60% 10%;
+    --foreground: 220 40% 97%;
+    --card: 230 50% 15% / 0.6;
+    --card-foreground: 220 40% 97%;
+    --popover: 230 50% 15% / 0.8;
+    --popover-foreground: 220 40% 97%;
     --primary: 233 58% 52%;
     --primary-foreground: 0 0% 98%;
     --secondary: 200 58% 60%;
     --secondary-foreground: 224 76% 12%;
-    --muted: 220 30% 92%;
-    --muted-foreground: 220 9% 45%;
+    --muted: 220 30% 20%;
+    --muted-foreground: 220 9% 55%;
     --accent: 356 71% 71%;
     --accent-foreground: 224 76% 12%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 20% 85% / 0.5;
-    --input: 220 20% 85%;
+    --border: 220 20% 30% / 0.5;
+    --input: 220 20% 25%;
     --ring: 233 58% 52%;
     --radius: 0.75rem;
   }
@@ -32,7 +32,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-transparent text-foreground;
+    @apply bg-background text-foreground;
   }
 }
 
@@ -358,4 +358,28 @@
   56% {
     stroke-dashoffset: 39;
   }
+}
+
+.low-poly-heart-bg {
+  position: fixed;
+  z-index: -10;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.low-poly-heart-bg.visible {
+  opacity: 1;
+}
+
+.low-poly-heart-bg svg {
+  position: fixed;
+  z-index: 200;
+  height: 90%;
+  width: 100%;
+  left: 0;
+  top: 5%;
 }
