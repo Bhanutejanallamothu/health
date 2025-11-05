@@ -95,7 +95,6 @@ export function AnimatedLogoutButton() {
   const [buttonState, setButtonState] = useState('default');
   const [classes, setClasses] = useState('');
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const router = useRouter();
 
   const updateButtonState = (state: keyof typeof logoutButtonStates) => {
     if (logoutButtonStates[state] && buttonRef.current) {
@@ -107,8 +106,6 @@ export function AnimatedLogoutButton() {
   };
   
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
     if (buttonState === 'default' || buttonState === 'hover') {
       setClasses('clicked');
       updateButtonState('walking1');
@@ -122,15 +119,10 @@ export function AnimatedLogoutButton() {
             updateButtonState('falling2');
             setTimeout(() => {
               updateButtonState('falling3');
-              setTimeout(() => {
-                setClasses('');
-                updateButtonState('default');
-                router.push('/');
-              }, 500);
-            }, 150);
-          }, 200);
-        }, 200);
-      }, 150);
+            }, 75); 
+          }, 100); 
+        }, 100); 
+      }, 75);
     }
   };
 
