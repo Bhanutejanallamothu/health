@@ -18,16 +18,22 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
-  const [shouldRender, setShouldRender] = useState(false);
-  const [isAuthPage, setIsAuthPage] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const loginPage = pathname === "/" || pathname.startsWith("/login") || pathname.startsWith("/signup");
-    setShouldRender(!loginPage);
-    setIsAuthPage(pathname.startsWith("/volunteer") || pathname.startsWith("/admin"));
-  }, [pathname]);
+    setIsClient(true);
+  }, []);
 
-  if (!shouldRender) {
+
+  if (!isClient) {
+    return null;
+  }
+  
+  const isLoginPage = pathname === "/" || pathname.startsWith("/login") || pathname.startsWith("/signup");
+  const isAuthPage = pathname.startsWith("/volunteer") || pathname.startsWith("/admin");
+
+
+  if (isLoginPage) {
     return null;
   }
 
