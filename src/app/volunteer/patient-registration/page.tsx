@@ -3,7 +3,7 @@ import { PatientRegistrationForm } from '@/components/volunteer/patient-registra
 
 export default function PatientRegistrationPage() {
   return (
-    <div className="flex flex-col items-center justify-center flex-grow py-12 px-4">
+    <div className="flex-grow flex items-center justify-center py-12 px-4">
       <PatientRegistrationForm />
     </div>
   );

@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next'
 import './globals.css'
 import { Navbar } from '@/components/layout/navbar'
@@ -25,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthenticatedLayout>
           <div className="flex flex-col min-h-screen">
             <Navbar />
-            <main className="flex-grow bg-transparent">{children}</main>
+            <main className="flex-grow flex flex-col bg-transparent">{children}</main>
             <Footer />
           </div>
         </AuthenticatedLayout>
