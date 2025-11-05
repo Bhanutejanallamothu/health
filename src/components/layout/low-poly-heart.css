@@ -14,6 +14,15 @@
   opacity: 1;
 }
 
+.low-poly-heart-bg svg {
+  position: fixed;
+  z-index: 200;
+  height: 90%;
+  width: 100%;
+  left: 0;
+  top: 5%;
+}
+
 .st0{display:none;}
 	.st1{fill:#D16B59;}
 	.st2{fill:#7C5565;}
@@ -517,4 +526,3 @@
   animation: fill-ani 2s ease-in 3s backwards;
 }
 
-    
