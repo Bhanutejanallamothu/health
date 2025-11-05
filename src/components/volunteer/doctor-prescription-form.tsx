@@ -116,7 +116,7 @@ export function DoctorPrescriptionForm() {
   };
 
   return (
-    <Card className="w-full max-w-lg">
+    <Card className="w-full max-w-lg bg-card/80 backdrop-blur-sm">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">
           Doctor Prescription
