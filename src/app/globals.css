@@ -4,48 +4,48 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 210 10% 23%;
-    --card: 210 40% 100%;
-    --card-foreground: 210 10% 23%;
-    --popover: 210 40% 100%;
-    --popover-foreground: 210 10% 23%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 217 91% 60%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 217 91% 60%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 91% 60%;
+    --background: 210 20% 98%; /* Soft Olive Mist tone - light grey */
+    --foreground: 220 10% 15%; /* Dark, readable text */
+    --card: 210 20% 96%;
+    --card-foreground: 220 10% 15%;
+    --popover: 210 20% 96%;
+    --popover-foreground: 220 10% 15%;
+    --primary: 90 30% 40%; /* Soft Olive Mist - primary */
+    --primary-foreground: 90 30% 98%;
+    --secondary: 90 30% 85%;
+    --secondary-foreground: 90 30% 30%;
+    --muted: 210 20% 94%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 90 30% 65%; /* Softer Olive for accents */
+    --accent-foreground: 90 30% 20%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 20% 88%;
+    --input: 210 20% 88%;
+    --ring: 90 30% 40%;
     --radius: 0.75rem;
   }
  
   .dark {
-    --background: 210 10% 23%;
-    --foreground: 210 40% 98%;
-    --card: 210 10% 23%;
-    --card-foreground: 210 40% 98%;
-    --popover: 210 10% 23%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 217 91% 60%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 215 20.2% 65.1%;
+    --background: 220 15% 10%;
+    --foreground: 210 20% 94%;
+    --card: 220 15% 15%;
+    --card-foreground: 210 20% 94%;
+    --popover: 220 15% 15%;
+    --popover-foreground: 210 20% 94%;
+    --primary: 90 30% 50%;
+    --primary-foreground: 90 30% 10%;
+    --secondary: 90 30% 25%;
+    --secondary-foreground: 90 30% 90%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 210 20% 70%;
+    --accent: 90 30% 40%;
+    --accent-foreground: 90 30% 90%;
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 25%;
+    --input: 220 15% 25%;
+    --ring: 90 30% 50%;
   }
 }
 
@@ -54,7 +54,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(90 35% 95%);
+    @apply text-foreground;
   }
 }
 
@@ -110,20 +111,20 @@
 
 .top:before {
   transform: rotate(45deg);
-  background: hsl(var(--accent));
+  background: hsl(90 30% 65%); /* Soft Olive Mist */
 }
 .top:after {
   transform: rotate(135deg);
-  background: hsl(var(--primary));
+  background: hsl(90 30% 40%); /* Soft Olive Mist - primary */
 }
 
 .bottom:before {
   transform: rotate(-45deg);
-  background: hsl(var(--secondary));
+  background: hsl(90 30% 85%); /* Soft Olive Mist - secondary */
 }
 .bottom:after {
   transform: rotate(-135deg);
-  background: hsl(var(--primary) / 0.8);
+  background: hsl(90 30% 40% / 0.8); /* Soft Olive Mist - primary with alpha */
 }
 
 .center {
