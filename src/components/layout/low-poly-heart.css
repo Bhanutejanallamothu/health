@@ -2,10 +2,10 @@
 .low-poly-heart-bg {
   position: fixed;
   z-index: -10;
-  height: 90%;
+  height: 100%;
   width: 100%;
   left: 0;
-  top: 5%;
+  top: 0;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
@@ -516,3 +516,5 @@
   transform: scale(1.1);
   animation: fill-ani 2s ease-in 3s backwards;
 }
+
+    
