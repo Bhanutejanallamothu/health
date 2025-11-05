@@ -52,23 +52,23 @@ export function Navbar() {
                 className="w-auto h-8"
               />
             </Link>
-            <div className="w-px h-6 bg-border/80 mx-2 hidden md:block" />
-            <nav className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <Link 
-                    key={link.href} 
-                    href={link.href} 
-                    className={cn(
-                        "flex items-center justify-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
-                        pathname === link.href && "bg-primary text-primary-foreground"
-                    )}
-                >
-                  {link.icon && <link.icon className="h-4 w-4" />}
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
         </div>
+
+        <nav className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <Link 
+                key={link.href} 
+                href={link.href} 
+                className={cn(
+                    "flex items-center justify-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+                    pathname === link.href && "bg-primary text-primary-foreground"
+                )}
+            >
+              {link.icon && <link.icon className="h-4 w-4" />}
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
         <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-2">
