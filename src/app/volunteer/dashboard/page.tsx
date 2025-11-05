@@ -18,6 +18,7 @@ import {
   Utensils,
 } from "lucide-react";
 import Link from "next/link";
+import { HoverLightEffect } from "@/components/ui/hover-light-effect";
 
 const dashboardItems = [
   { icon: UserPlus, label: "Patient Registration", number: 1, href: "/volunteer/patient-registration" },
@@ -45,14 +46,16 @@ export default function VolunteerDashboardPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {dashboardItems.map((item) => (
             <Link key={item.number} href={item.href} passHref>
-              <Card
-                className="flex flex-col items-center justify-center p-4 aspect-square text-center bg-card/80 hover:bg-card/90 backdrop-blur-sm hover:shadow-lg transition-shadow cursor-pointer h-full"
-              >
-                <item.icon className="w-8 h-8 text-primary mb-2" />
-                <p className="text-sm font-medium text-card-foreground">
-                  {item.number}. {item.label}
-                </p>
-              </Card>
+              <HoverLightEffect>
+                <Card
+                  className="flex flex-col items-center justify-center p-4 aspect-square text-center bg-card/80 hover:bg-card/90 backdrop-blur-sm hover:shadow-lg transition-shadow cursor-pointer h-full"
+                >
+                  <item.icon className="w-8 h-8 text-primary mb-2" />
+                  <p className="text-sm font-medium text-card-foreground">
+                    {item.number}. {item.label}
+                  </p>
+                </Card>
+              </HoverLightEffect>
             </Link>
           ))}
         </div>
