@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -49,7 +50,7 @@ export function PatientStatusTracker() {
   }
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md bg-card/80 backdrop-blur-sm">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center text-primary">
           Patient Status Tracker
@@ -83,7 +84,7 @@ export function PatientStatusTracker() {
             </h3>
             <div className="space-y-3">
               {statusSteps.map((step, index) => (
-                <div key={index} className="flex items-center p-3 bg-gray-100 rounded-lg">
+                <div key={index} className="flex items-center p-3 bg-muted/50 rounded-lg">
                   <Hourglass className="h-5 w-5 mr-3 text-yellow-500" />
                   <span className="font-medium text-muted-foreground">{step}</span>
                 </div>
