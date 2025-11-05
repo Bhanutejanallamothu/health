@@ -26,9 +26,13 @@ export function Navbar() {
     pathname.startsWith("/login") ||
     pathname.startsWith("/signup");
 
+  if (isLoginPage) {
+    return null; // Don't show navbar on login pages
+  }
+
   return (
-    <header className="w-full p-4 bg-primary/10">
-      <div className="container flex items-center justify-between">
+    <header className="sticky top-0 z-50 p-4">
+      <div className="container flex h-14 items-center justify-between rounded-lg border border-border/60 bg-card/60 px-6 shadow-lg backdrop-blur-lg">
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src="https://swecha.org/sites/default/files/Swecha-Telangana-Logo-124w.png"
