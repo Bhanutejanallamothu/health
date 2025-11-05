@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -46,7 +47,7 @@ export function MedicineVerificationForm() {
   }
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md bg-card/80 backdrop-blur-sm">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">
           Medicine Pickup
