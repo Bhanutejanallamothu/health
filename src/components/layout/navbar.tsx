@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { AnimatedLogoutButton } from "./animated-logout-button";
 
 
 const navLinks = [
@@ -94,6 +95,7 @@ export function Navbar() {
                   </DropdownMenuLabel>
                 </DropdownMenuContent>
               </DropdownMenu>
+              <AnimatedLogoutButton />
             </div>
             <div className="md:hidden">
               <Sheet>
