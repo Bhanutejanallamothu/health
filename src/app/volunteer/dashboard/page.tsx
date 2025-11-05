@@ -31,12 +31,12 @@ const dashboardItems = [
   { icon: Users, label: "Counselling", number: 7, href: "/volunteer/counselling" },
   { icon: FlaskConical, label: "Lab", number: 8, href: "/volunteer/lab" },
   { icon: Shield, label: "Patient Support", number: 9, href: "/volunteer/patient-support" },
-  { icon: Ticket, label: "Token Generation", number: 10, href: "#" },
-  { icon: Hourglass, label: "Patients Waiting", number: 11, href: "#" },
-  { icon: HelpingHand, label: "Doctor Assistance", number: 12, href: "#" },
+  { icon: Ticket, label: "Token Generation", number: 10, href: "/404" },
+  { icon: Hourglass, label: "Patients Waiting", number: 11, href: "/404" },
+  { icon: HelpingHand, label: "Doctor Assistance", number: 12, href: "/404" },
   { icon: List, label: "View Queues", number: 13, href: "/volunteer/view-queues" },
-  { icon: Truck, label: "Medicine Delivery", number: 14, href: "#" },
-  { icon: Utensils, label: "Food", number: 15, href: "#" },
+  { icon: Truck, label: "Medicine Delivery", number: 14, href: "/404" },
+  { icon: Utensils, label: "Food", number: 15, href: "/404" },
   { icon: User, label: "Profile", number: 16, href: "/volunteer/profile" },
 ];
 
