@@ -41,7 +41,7 @@ export function Navbar() {
   
   return (
     <header className="sticky top-4 z-50 w-full px-4 flex justify-center">
-      <div className="flex h-14 items-center rounded-full border border-border/60 bg-background/60 p-2 px-3 shadow-lg backdrop-blur-lg">
+      <div className="flex h-14 items-center rounded-full border border-border/60 bg-background/60 p-2 px-8 shadow-lg backdrop-blur-lg">
         <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2 shrink-0">
               <Image
