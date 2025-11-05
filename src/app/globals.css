@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 90 25% 92% / 0;
+    --background: 90 25% 92%;
     --foreground: 90 20% 10%;
     --card: 90 30% 95% / 0.6;
     --card-foreground: 90 20% 10%;
@@ -33,7 +33,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-color: hsl(90, 25%, 92%);
+    background-color: hsl(90 25% 92%);
   }
 }
 
