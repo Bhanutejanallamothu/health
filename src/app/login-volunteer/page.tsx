@@ -52,7 +52,7 @@ export default function VolunteerLoginPage() {
         <div className="bottom"></div>
         <div onClick={(e) => e.stopPropagation()} className="center flex flex-col items-center justify-center bg-card rounded-lg shadow-2xl p-8 w-[400px]">
             <h2 className="text-3xl font-bold mb-6 text-card-foreground">
-                Volunteer Signup
+                Volunteer Login
             </h2>
             <form onSubmit={handleLogin} className="w-full">
                 <div className="grid gap-4">
@@ -95,7 +95,7 @@ export default function VolunteerLoginPage() {
                         </Button>
                     </div>
                     <Button type="submit" className="w-full">
-                        Sign Up
+                        Login
                     </Button>
                 </div>
             </form>
@@ -106,9 +106,9 @@ export default function VolunteerLoginPage() {
                     </Link>
                 </p>
                 <p className="text-sm text-muted-foreground">
-                    Already have an account?{" "}
-                    <Link href="/" className="font-semibold text-primary hover:underline">
-                    Login
+                    Don't have an account?{" "}
+                    <Link href="/login-volunteer" className="font-semibold text-primary hover:underline">
+                    Sign up
                     </Link>
                 </p>
             </div>
@@ -116,3 +116,4 @@ export default function VolunteerLoginPage() {
     </div>
   );
 }
+
