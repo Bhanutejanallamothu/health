@@ -8,7 +8,7 @@ import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { AnimatedLogoutButton } from "./animated-logout-button";
 import './animated-logout-button.css';
-import { useMemo } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { href: "/volunteer/dashboard", label: "Dashboard" },
@@ -18,22 +18,17 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const [shouldRender, setShouldRender] = useState(false);
+  const [isAuthPage, setIsAuthPage] = useState(false);
 
-  const isAuthPage = useMemo(
-    () => pathname.startsWith("/volunteer") || pathname.startsWith("/admin"),
-    [pathname]
-  );
-  
-  const isLoginPage = useMemo(
-    () =>
-      pathname === "/" ||
-      pathname.startsWith("/login") ||
-      pathname.startsWith("/signup"),
-    [pathname]
-  );
+  useEffect(() => {
+    const loginPage = pathname === "/" || pathname.startsWith("/login") || pathname.startsWith("/signup");
+    setShouldRender(!loginPage);
+    setIsAuthPage(pathname.startsWith("/volunteer") || pathname.startsWith("/admin"));
+  }, [pathname]);
 
-  if (isLoginPage) {
-    return null; // Don't show navbar on login pages
+  if (!shouldRender) {
+    return null;
   }
 
   return (
@@ -48,7 +43,6 @@ export function Navbar() {
           />
         </Link>
         <div className="flex items-center gap-4">
-          {!isLoginPage && (
             <nav className="hidden md:flex items-center gap-6">
               {navLinks.map((link) => (
                 <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground hover:text-primary">
@@ -56,7 +50,6 @@ export function Navbar() {
                 </Link>
               ))}
             </nav>
-          )}
           {isAuthPage && (
             <>
               <div className="hidden md:flex items-center gap-2">
@@ -86,7 +79,6 @@ export function Navbar() {
               </div>
             </>
           )}
-          {isLoginPage && <div className="md:hidden w-8"></div> /* Spacer */}
         </div>
       </div>
     </header>
