@@ -41,7 +41,7 @@ export function Navbar() {
   
   return (
     <header className="sticky top-4 z-50 w-full px-4">
-      <div className="container flex h-14 items-center justify-between rounded-full border border-border/60 bg-background/60 p-2 px-3 shadow-lg backdrop-blur-lg">
+      <div className="container flex h-14 items-center rounded-full border border-border/60 bg-background/60 p-2 px-3 shadow-lg backdrop-blur-lg">
         <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2 shrink-0">
               <Image
@@ -54,21 +54,23 @@ export function Navbar() {
             </Link>
         </div>
 
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Link 
-                key={link.href} 
-                href={link.href} 
-                className={cn(
-                    "flex items-center justify-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
-                    pathname === link.href && "bg-primary text-primary-foreground"
-                )}
-            >
-              {link.icon && <link.icon className="h-4 w-4" />}
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="flex-1 flex justify-center">
+            <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+                <Link 
+                    key={link.href} 
+                    href={link.href} 
+                    className={cn(
+                        "flex items-center justify-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+                        pathname === link.href && "bg-primary text-primary-foreground"
+                    )}
+                >
+                {link.icon && <link.icon className="h-4 w-4" />}
+                {link.label}
+                </Link>
+            ))}
+            </nav>
+        </div>
 
         <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-2">
