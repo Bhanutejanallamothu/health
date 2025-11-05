@@ -70,12 +70,12 @@ export function VitalsForm() {
               control={form.control}
               name="bookNumber"
               render={({ field }) => (
-                <FormItem key={field.name}>
-                  <FormLabel>Book Number</FormLabel>
-                  <FormControl>
+                <FormItem className="grid grid-cols-4 items-center gap-4">
+                  <FormLabel className="text-right">Book Number</FormLabel>
+                  <FormControl className="col-span-3">
                     <Input placeholder="Enter patient book number" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="col-start-2 col-span-3" />
                 </FormItem>
               )}
             />
@@ -83,12 +83,12 @@ export function VitalsForm() {
               control={form.control}
               name="bp"
               render={({ field }) => (
-                <FormItem key={field.name}>
-                  <FormLabel>BP (systolic/diastolic)</FormLabel>
-                  <FormControl>
+                <FormItem className="grid grid-cols-4 items-center gap-4">
+                  <FormLabel className="text-right">BP</FormLabel>
+                  <FormControl className="col-span-3">
                     <Input placeholder="e.g., 120/80" {...field} />
                   </FormControl>
-                  <FormMessage />
+                   <FormMessage className="col-start-2 col-span-3" />
                 </FormItem>
               )}
             />
@@ -96,12 +96,12 @@ export function VitalsForm() {
               control={form.control}
               name="pulse"
               render={({ field }) => (
-                <FormItem key={field.name}>
-                  <FormLabel>Pulse</FormLabel>
-                  <FormControl>
+                <FormItem className="grid grid-cols-4 items-center gap-4">
+                  <FormLabel className="text-right">Pulse</FormLabel>
+                  <FormControl className="col-span-3">
                     <Input placeholder="e.g., 72" {...field} />
                   </FormControl>
-                  <FormMessage />
+                   <FormMessage className="col-start-2 col-span-3" />
                 </FormItem>
               )}
             />
@@ -109,12 +109,12 @@ export function VitalsForm() {
               control={form.control}
               name="rbs"
               render={({ field }) => (
-                <FormItem key={field.name}>
-                  <FormLabel>RBS</FormLabel>
-                  <FormControl>
+                <FormItem className="grid grid-cols-4 items-center gap-4">
+                  <FormLabel className="text-right">RBS</FormLabel>
+                  <FormControl className="col-span-3">
                     <Input placeholder="e.g., 90" {...field} />
                   </FormControl>
-                  <FormMessage />
+                   <FormMessage className="col-start-2 col-span-3" />
                 </FormItem>
               )}
             />
@@ -122,12 +122,12 @@ export function VitalsForm() {
               control={form.control}
               name="weight"
               render={({ field }) => (
-                <FormItem key={field.name}>
-                  <FormLabel>Weight (kg)</FormLabel>
-                  <FormControl>
+                <FormItem className="grid grid-cols-4 items-center gap-4">
+                  <FormLabel className="text-right">Weight (kg)</FormLabel>
+                  <FormControl className="col-span-3">
                     <Input type="number" placeholder="e.g., 70" {...field} />
                   </FormControl>
-                  <FormMessage />
+                   <FormMessage className="col-start-2 col-span-3" />
                 </FormItem>
               )}
             />
@@ -135,12 +135,12 @@ export function VitalsForm() {
               control={form.control}
               name="height"
               render={({ field }) => (
-                <FormItem key={field.name}>
-                  <FormLabel>Height (cm)</FormLabel>
-                  <FormControl>
+                <FormItem className="grid grid-cols-4 items-center gap-4">
+                  <FormLabel className="text-right">Height (cm)</FormLabel>
+                  <FormControl className="col-span-3">
                     <Input type="number" placeholder="e.g., 175" {...field} />
                   </FormControl>
-                  <FormMessage />
+                   <FormMessage className="col-start-2 col-span-3" />
                 </FormItem>
               )}
             />
@@ -148,12 +148,12 @@ export function VitalsForm() {
               control={form.control}
               name="lastMealTime"
               render={({ field }) => (
-                <FormItem key={field.name}>
-                  <FormLabel>Last Meal and Time</FormLabel>
-                  <FormControl>
+                <FormItem className="grid grid-cols-4 items-center gap-4">
+                  <FormLabel className="text-right">Last Meal</FormLabel>
+                  <FormControl className="col-span-3">
                     <Input placeholder="e.g., Breakfast, 8:00 AM" {...field} />
                   </FormControl>
-                  <FormMessage />
+                   <FormMessage className="col-start-2 col-span-3" />
                 </FormItem>
               )}
             />
