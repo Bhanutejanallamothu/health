@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function ViewQueuesPage() {
   return (
-    <div className="flex-grow bg-gray-50 py-12 px-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="flex-grow flex items-center justify-center py-12 px-4">
+      <div className="w-full max-w-2xl">
         <h1 className="text-3xl font-bold text-center mb-8">Doctor Queues</h1>
         <div className="space-y-4">
           {doctors.map((doctor) => (
-            <Card key={doctor.id}>
+            <Card key={doctor.id} className="bg-card/80 backdrop-blur-sm">
               <CardContent className="p-4 flex items-center justify-between">
                 <div>
                   <h2 className="font-semibold">{doctor.name}</h2>
