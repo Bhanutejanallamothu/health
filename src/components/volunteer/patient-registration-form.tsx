@@ -113,7 +113,7 @@ export function PatientRegistrationForm() {
 
   if (dataLoaded && patientData) {
     return (
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-lg">
         <CardHeader>
           <div className="relative flex items-center justify-center">
             <Button variant="ghost" size="icon" className="absolute left-0" onClick={handleBack}>
@@ -136,12 +136,12 @@ export function PatientRegistrationForm() {
                 control={patientDetailsForm.control}
                 name="bookNumber"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Book Number</FormLabel>
-                    <FormControl>
+                  <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Book Number</FormLabel>
+                    <FormControl className="col-span-3">
                       <Input {...field} disabled />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4" />
                   </FormItem>
                 )}
               />
@@ -149,12 +149,12 @@ export function PatientRegistrationForm() {
                 control={patientDetailsForm.control}
                 name="name"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name *</FormLabel>
-                    <FormControl>
+                  <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Name *</FormLabel>
+                    <FormControl className="col-span-3">
                       <Input placeholder="Enter patient name" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4" />
                   </FormItem>
                 )}
               />
@@ -162,12 +162,12 @@ export function PatientRegistrationForm() {
                 control={patientDetailsForm.control}
                 name="phone"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number *</FormLabel>
-                    <FormControl>
+                  <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Phone Number *</FormLabel>
+                    <FormControl className="col-span-3">
                       <Input placeholder="Enter phone number" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4" />
                   </FormItem>
                 )}
               />
@@ -175,12 +175,12 @@ export function PatientRegistrationForm() {
                 control={patientDetailsForm.control}
                 name="age"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Age *</FormLabel>
-                    <FormControl>
+                  <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Age *</FormLabel>
+                    <FormControl className="col-span-3">
                       <Input type="number" placeholder="Enter age" {...field} value={field.value || ''} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4" />
                   </FormItem>
                 )}
               />
@@ -188,9 +188,9 @@ export function PatientRegistrationForm() {
                 control={patientDetailsForm.control}
                 name="gender"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Gender</FormLabel>
-                    <FormControl>
+                  <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Gender</FormLabel>
+                    <FormControl className="col-span-3">
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -210,7 +210,7 @@ export function PatientRegistrationForm() {
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4" />
                   </FormItem>
                 )}
               />
@@ -218,12 +218,12 @@ export function PatientRegistrationForm() {
                 control={patientDetailsForm.control}
                 name="area"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Area *</FormLabel>
-                    <FormControl>
+                  <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Area *</FormLabel>
+                    <FormControl className="col-span-3">
                       <Input placeholder="Enter area" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4" />
                   </FormItem>
                 )}
               />
@@ -231,12 +231,12 @@ export function PatientRegistrationForm() {
                 control={patientDetailsForm.control}
                 name="tokenNumber"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Token Number</FormLabel>
-                    <FormControl>
+                  <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Token Number</FormLabel>
+                    <FormControl className="col-span-3">
                       <Input {...field} disabled />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4" />
                   </FormItem>
                 )}
               />
@@ -261,17 +261,17 @@ export function PatientRegistrationForm() {
       </CardHeader>
       <Form {...bookNumberForm}>
         <form onSubmit={bookNumberForm.handleSubmit(onBookNumberSubmit)}>
-          <CardContent>
-            <FormField
+          <CardContent className="space-y-4">
+             <FormField
               control={bookNumberForm.control}
               name="bookNumber"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Book Number *</FormLabel>
-                  <FormControl>
+                <FormItem className="grid grid-cols-4 items-center gap-4">
+                  <FormLabel className="text-right">Book Number *</FormLabel>
+                  <FormControl className="col-span-3">
                     <Input placeholder="Enter patient book number" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="col-start-2 col-span-3"/>
                 </FormItem>
               )}
             />
