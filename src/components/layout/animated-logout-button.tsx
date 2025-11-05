@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -33,9 +34,9 @@ const logoutButtonStates = {
     '--transform-calf2': 'rotate(-20deg)'
   },
   'walking1': {
-    '--figure-duration': '300',
+    '--figure-duration': '150',
     '--transform-figure': 'translateX(11px)',
-    '--walking-duration': '300',
+    '--walking-duration': '150',
     '--transform-arm1': 'translateX(-4px) translateY(-2px) rotate(120deg)',
     '--transform-wrist1': 'rotate(-5deg)',
     '--transform-arm2': 'translateX(4px) rotate(-110deg)',
@@ -46,9 +47,9 @@ const logoutButtonStates = {
     '--transform-calf2': 'rotate(20deg)'
   },
   'walking2': {
-    '--figure-duration': '400',
+    '--figure-duration': '200',
     '--transform-figure': 'translateX(17px)',
-    '--walking-duration': '300',
+    '--walking-duration': '150',
     '--transform-arm1': 'rotate(60deg)',
     '--transform-wrist1': 'rotate(-15deg)',
     '--transform-arm2': 'rotate(-45deg)',
@@ -59,8 +60,8 @@ const logoutButtonStates = {
     '--transform-calf2': 'rotate(-20deg)'
   },
   'falling1': {
-    '--figure-duration': '1600',
-    '--walking-duration': '400',
+    '--figure-duration': '800',
+    '--walking-duration': '200',
     '--transform-arm1': 'rotate(-60deg)',
     '--transform-wrist1': 'none',
     '--transform-arm2': 'rotate(30deg)',
@@ -70,7 +71,7 @@ const logoutButtonStates = {
     '--transform-leg2': 'rotate(20deg)'
   },
   'falling2': {
-    '--walking-duration': '300',
+    '--walking-duration': '150',
     '--transform-arm1': 'rotate(-100deg)',
     '--transform-arm2': 'rotate(-60deg)',
     '--transform-wrist2': 'rotate(60deg)',
@@ -79,7 +80,7 @@ const logoutButtonStates = {
     '--transform-leg2': 'rotate(-60deg)'
   },
   'falling3': {
-    '--walking-duration': '500',
+    '--walking-duration': '250',
     '--transform-arm1': 'rotate(-30deg)',
     '--transform-wrist1': 'rotate(40deg)',
     '--transform-arm2': 'rotate(50deg)',
@@ -125,11 +126,11 @@ export function AnimatedLogoutButton() {
                 setClasses('');
                 updateButtonState('default');
                 router.push('/');
-              }, 1000);
-            }, 300);
-          }, 400);
-        }, 400);
-      }, 300);
+              }, 500);
+            }, 150);
+          }, 200);
+        }, 200);
+      }, 150);
     }
   };
 
