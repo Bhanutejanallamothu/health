@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import './animated-logout-button.css';
+import { useRouter } from 'next/navigation';
 
 const logoutButtonStates = {
   'default': {
@@ -93,6 +94,7 @@ export function AnimatedLogoutButton() {
   const [buttonState, setButtonState] = useState('default');
   const [classes, setClasses] = useState('');
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   const updateButtonState = (state: keyof typeof logoutButtonStates) => {
     if (logoutButtonStates[state] && buttonRef.current) {
@@ -103,7 +105,9 @@ export function AnimatedLogoutButton() {
     }
   };
   
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
     if (buttonState === 'default' || buttonState === 'hover') {
       setClasses('clicked');
       updateButtonState('walking1');
@@ -120,7 +124,7 @@ export function AnimatedLogoutButton() {
               setTimeout(() => {
                 setClasses('');
                 updateButtonState('default');
-                // We can add router push here to redirect after animation
+                router.push('/');
               }, 1000);
             }, 300);
           }, 400);
