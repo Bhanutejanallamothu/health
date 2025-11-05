@@ -28,6 +28,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ArrowLeft } from 'lucide-react';
 import { patients } from '@/lib/placeholder-data';
 import type { Patient } from '@/lib/types';
+import { cn } from '@/lib/utils';
 
 const bookNumberSchema = z.object({
   bookNumber: z.string().min(1, 'Book number is required.'),
@@ -113,7 +114,7 @@ export function PatientRegistrationForm() {
 
   if (dataLoaded && patientData) {
     return (
-      <Card className="w-full max-w-lg">
+      <Card className="w-full max-w-lg bg-card/80 backdrop-blur-sm">
         <CardHeader>
           <div className="relative flex items-center justify-center">
             <Button variant="ghost" size="icon" className="absolute left-0" onClick={handleBack}>
@@ -154,7 +155,7 @@ export function PatientRegistrationForm() {
                     <FormControl className="col-span-3">
                       <Input placeholder="Enter patient name" {...field} />
                     </FormControl>
-                    <FormMessage className="col-span-4" />
+                    <FormMessage className="col-start-2 col-span-3"/>
                   </FormItem>
                 )}
               />
@@ -167,7 +168,7 @@ export function PatientRegistrationForm() {
                     <FormControl className="col-span-3">
                       <Input placeholder="Enter phone number" {...field} />
                     </FormControl>
-                    <FormMessage className="col-span-4" />
+                    <FormMessage className="col-start-2 col-span-3"/>
                   </FormItem>
                 )}
               />
@@ -180,7 +181,7 @@ export function PatientRegistrationForm() {
                     <FormControl className="col-span-3">
                       <Input type="number" placeholder="Enter age" {...field} value={field.value || ''} />
                     </FormControl>
-                    <FormMessage className="col-span-4" />
+                    <FormMessage className="col-start-2 col-span-3"/>
                   </FormItem>
                 )}
               />
@@ -210,7 +211,7 @@ export function PatientRegistrationForm() {
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
-                    <FormMessage className="col-span-4" />
+                    <FormMessage className="col-start-2 col-span-3"/>
                   </FormItem>
                 )}
               />
@@ -223,7 +224,7 @@ export function PatientRegistrationForm() {
                     <FormControl className="col-span-3">
                       <Input placeholder="Enter area" {...field} />
                     </FormControl>
-                    <FormMessage className="col-span-4" />
+                    <FormMessage className="col-start-2 col-span-3"/>
                   </FormItem>
                 )}
               />
@@ -253,7 +254,7 @@ export function PatientRegistrationForm() {
   }
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md bg-card/80 backdrop-blur-sm">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">
           Patient Registration
