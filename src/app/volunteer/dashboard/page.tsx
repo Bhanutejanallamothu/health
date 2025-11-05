@@ -16,6 +16,7 @@ import {
   List,
   Truck,
   Utensils,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { HoverLightEffect } from "@/components/ui/hover-light-effect";
@@ -36,6 +37,7 @@ const dashboardItems = [
   { icon: List, label: "View Queues", number: 13, href: "/volunteer/view-queues" },
   { icon: Truck, label: "Medicine Delivery", number: 14, href: "#" },
   { icon: Utensils, label: "Food", number: 15, href: "#" },
+  { icon: User, label: "Profile", number: 16, href: "/volunteer/profile" },
 ];
 
 export default function VolunteerDashboardPage() {
