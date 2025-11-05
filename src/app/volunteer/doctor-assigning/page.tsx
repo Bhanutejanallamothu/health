@@ -56,8 +56,8 @@ export default function DoctorAssigningPage() {
   }
 
   return (
-    <div className="flex-grow flex items-center justify-center bg-gray-50 py-12 px-4">
-      <Card className="w-full max-w-md">
+    <div className="flex-grow flex items-center justify-center py-12 px-4">
+      <Card className="w-full max-w-md bg-card/80 backdrop-blur-sm">
         <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">
               Doctor Assigning
@@ -112,7 +112,7 @@ export default function DoctorAssigningPage() {
               />
             </CardContent>
             <CardFooter>
-              <Button type="submit" className="w-full bg-gray-800 text-white hover:bg-gray-900">
+              <Button type="submit" className="w-full">
                 Submit
               </Button>
             </CardFooter>
