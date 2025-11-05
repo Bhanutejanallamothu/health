@@ -175,7 +175,7 @@ body > div[class*="__next_not-found__"] {
   transition: opacity 0.5s ease-in-out;
 }
 
-.low-poly-heart-bg.visible {
+body.show-background .low-poly-heart-bg {
   opacity: 1;
 }
 
