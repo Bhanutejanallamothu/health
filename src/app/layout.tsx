@@ -1,10 +1,8 @@
 
 import type { Metadata } from 'next'
 import './globals.css'
-import { Navbar } from '@/components/layout/navbar'
-import { Footer } from '@/components/layout/footer'
 import { Toaster } from '@/components/ui/toaster'
-import { AuthenticatedLayout } from '@/components/layout/authenticated-layout'
+import { ClientLayout } from '@/components/layout/client-layout'
 
 export const metadata: Metadata = {
   title: 'SWECHA Healthcare',
@@ -23,13 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-body antialiased bg-background text-foreground dark">
-        <AuthenticatedLayout>
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow flex flex-col bg-transparent">{children}</main>
-            <Footer />
-          </div>
-        </AuthenticatedLayout>
+        <ClientLayout>{children}</ClientLayout>
         <Toaster />
       </body>
     </html>
