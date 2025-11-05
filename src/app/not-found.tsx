@@ -7,7 +7,7 @@ import { LowPolyHeartBackground } from '@/components/layout/low-poly-heart-backg
 
 export default function NotFound() {
   return (
-    <>
+    <div className="flex flex-grow flex-col items-center justify-center">
       <LowPolyHeartBackground />
       <div className="flex flex-grow items-center justify-center">
         <Card className="w-full max-w-md text-center bg-card/80 backdrop-blur-sm">
@@ -25,6 +25,6 @@ export default function NotFound() {
           </CardContent>
         </Card>
       </div>
-    </>
+    </div>
   );
 }
