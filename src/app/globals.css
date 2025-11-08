@@ -249,7 +249,9 @@ body.show-background .low-poly-heart-bg {
   width: 40px;
   line-height: 25px;
   text-align: center;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   font-weight: bolder;
@@ -262,7 +264,7 @@ body.show-background .low-poly-heart-bg {
 .toggle-show .toggle-show-btn:before,
 .toggle-show .toggle-show-btn:after {
   position: absolute;
-  left: 2px;
+  left: 0;
   top: 0;
   font-size: 20px;
   line-height: 40px;
