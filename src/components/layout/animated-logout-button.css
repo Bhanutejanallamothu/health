@@ -13,7 +13,7 @@
   --transform-calf2: none;
   background: none;
   border: 0;
-  color: #f4f7ff;
+  color: hsl(var(--muted-foreground));
   cursor: pointer;
   display: block;
   font-family: "Quicksand", sans-serif;
@@ -29,7 +29,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 .logoutButton::before {
-  background-color: #1f2335;
+  background-color: hsl(var(--muted) / 0.5);
   border-radius: 5px;
   content: "";
   display: block;
@@ -41,6 +41,9 @@
   transition: transform 50ms ease;
   width: 100%;
   z-index: 2;
+}
+.logoutButton:hover::before {
+    background-color: hsl(var(--muted));
 }
 .logoutButton:hover .door {
   transform: rotateY(20deg);
@@ -76,18 +79,18 @@
   z-index: 1;
 }
 .logoutButton--light::before {
-  background-color: #f4f7ff;
+  background-color: hsl(var(--foreground));
 }
 .logoutButton--light .button-text {
-  color: #1f2335;
+  color: hsl(var(--background));
 }
 .logoutButton--light .door,
 .logoutButton--light .doorway {
-  fill: #1f2335;
+  fill: hsl(var(--background));
 }
 
 .button-text {
-  color: #f4f7ff;
+  color: hsl(var(--muted-foreground));
   font-weight: 500;
   position: relative;
   z-index: 10;
@@ -100,7 +103,7 @@
 
 .figure {
   bottom: 5px;
-  fill: #4371f7;
+  fill: hsl(var(--muted-foreground));
   right: 18px;
   transform: var(--transform-figure);
   transition: transform calc(var(--figure-duration) * 1ms) cubic-bezier(0.2, 0.1, 0.8, 0.9);
@@ -111,7 +114,7 @@
 .door,
 .doorway {
   bottom: 4px;
-  fill: #f4f7ff;
+  fill: hsl(var(--muted-foreground));
   right: 12px;
   width: 32px;
 }
@@ -124,8 +127,8 @@
   z-index: 5;
 }
 .door path {
-  fill: #4371f7;
-  stroke: #4371f7;
+  fill: hsl(var(--primary));
+  stroke: hsl(var(--primary));
   stroke-width: 4;
 }
 
