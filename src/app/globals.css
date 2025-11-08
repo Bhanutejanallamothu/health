@@ -246,9 +246,8 @@ body.show-background .low-poly-heart-bg {
   display: flex;
 }
 .toggle-show .toggle-show-btn {
-  height: 40px;
-  width: 40px;
-  line-height: 25px;
+  height: 36px;
+  width: 36px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -267,8 +266,8 @@ body.show-background .low-poly-heart-bg {
   position: absolute;
   left: 0;
   top: 0;
-  font-size: 20px;
-  line-height: 40px;
+  font-size: 18px;
+  line-height: 36px;
   width: 100%;
   text-align: center;
   height: 100%;
@@ -280,9 +279,9 @@ body.show-background .low-poly-heart-bg {
 }
 .toggle-show .toggle-show-btn:after {
   content: '...';
-  line-height: 27px;
+  line-height: 24px;
   transform: scale(0);
-  font-size: 25px;
+  font-size: 22px;
   letter-spacing: 5px;
 }
 .toggle-show .toggle-show-btn.changeit:before {
