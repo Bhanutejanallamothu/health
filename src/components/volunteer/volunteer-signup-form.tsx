@@ -36,7 +36,7 @@ export function VolunteerSignupForm() {
       username: "",
       email: "",
       phone: "",
-      age: undefined,
+      age: "" as any,
       password: "",
     },
   });
