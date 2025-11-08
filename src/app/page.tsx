@@ -101,7 +101,7 @@ export default function LoginPage() {
                 </p>
                 <p className="text-sm text-muted-foreground">
                     New to volunteering?{" "}
-                    <Link href="/register" className="font-semibold text-primary hover:underline">
+                    <Link href="/about" className="font-semibold text-primary hover:underline">
                       Sign up
                     </Link>
                 </p>
