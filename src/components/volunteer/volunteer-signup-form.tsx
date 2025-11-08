@@ -17,8 +17,9 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/firebase";
+import { useAuth, useFirestore, setDocumentNonBlocking } from "@/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc } from 'firebase/firestore';
 import { FlippablePasswordInput } from "../ui/flippable-password-input";
 
 const formSchema = z.object({
@@ -33,6 +34,7 @@ export function VolunteerSignupForm() {
   const { toast } = useToast();
   const router = useRouter();
   const auth = useAuth();
+  const firestore = useFirestore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,13 +42,13 @@ export function VolunteerSignupForm() {
       username: "",
       email: "",
       phone: "",
-      age: '',
+      age: undefined,
       password: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-     if (!auth) {
+     if (!auth || !firestore) {
         toast({
             title: 'Auth service not available',
             description: 'Please try again later.',
@@ -55,7 +57,20 @@ export function VolunteerSignupForm() {
         return;
     }
     try {
-      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      const user = userCredential.user;
+
+      if (user) {
+        const userDocRef = doc(firestore, 'users', user.uid);
+        const userData = {
+            username: values.username,
+            email: values.email,
+            phone: values.phone,
+            age: values.age,
+        };
+        setDocumentNonBlocking(userDocRef, userData, { merge: true });
+      }
+
       toast({
         title: "Account Created!",
         description: "Your volunteer account has been created successfully.",

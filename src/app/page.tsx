@@ -9,17 +9,19 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
-import { useAuth, useUser } from '@/firebase';
+import { useAuth, useUser, useFirestore } from '@/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FlippablePasswordInput } from '@/components/ui/flippable-password-input';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState(''); // Can be email or username
   const [password, setPassword] = useState('');
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
   const auth = useAuth();
+  const firestore = useFirestore();
   const { user, isUserLoading } = useUser();
 
   useEffect(() => {
@@ -34,14 +36,42 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!auth) {
+    if (!auth || !firestore) {
         toast({
-            title: 'Auth service not available',
+            title: 'Services not available',
             description: 'Please try again later.',
             variant: 'destructive',
         });
         return;
     }
+    
+    let email = identifier;
+    // Simple check if identifier is likely not an email
+    if (!identifier.includes('@')) {
+      try {
+        const usersRef = collection(firestore, "users");
+        const q = query(usersRef, where("username", "==", identifier));
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.empty) {
+          toast({
+            title: 'Login Failed',
+            description: 'Username not found.',
+            variant: 'destructive',
+          });
+          return;
+        }
+        email = querySnapshot.docs[0].data().email;
+      } catch (error) {
+        console.error("Error fetching user by username: ", error);
+        toast({
+            title: 'Login Failed',
+            description: 'Could not verify username.',
+            variant: 'destructive',
+        });
+        return;
+      }
+    }
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast({
@@ -52,7 +82,7 @@ export default function LoginPage() {
     } catch (error: any) {
       toast({
         title: 'Login Failed',
-        description: error.message || 'Invalid email or password.',
+        description: error.message || 'Invalid credentials.',
         variant: 'destructive',
       });
     }
@@ -86,14 +116,14 @@ export default function LoginPage() {
         <form onSubmit={handleLogin} className="w-full">
           <div className="grid gap-4">
             <div className="grid gap-2 text-left">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="identifier">Email or Username</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="Email"
+                id="identifier"
+                type="text"
+                placeholder="Email or Username"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
               />
             </div>
             <div className="grid gap-2 relative text-left">
