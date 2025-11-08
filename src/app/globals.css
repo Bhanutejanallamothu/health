@@ -192,6 +192,7 @@ body.show-background .low-poly-heart-bg {
 .flippable-password-card > div {
   perspective: 300px;
   display: flex;
+  align-items: center;
 }
 .flippable-password-card.flip > div > .clayout {
   transform: rotateY(360deg);
