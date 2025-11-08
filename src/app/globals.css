@@ -244,6 +244,8 @@ body.show-background .low-poly-heart-bg {
 }
 .toggle-show {
   display: flex;
+  position: relative;
+  top: 1px;
 }
 .toggle-show .toggle-show-btn {
   height: 36px;
