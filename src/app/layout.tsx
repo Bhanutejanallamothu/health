@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import { ClientLayout } from '@/components/layout/client-layout'
+import { FirebaseClientProvider } from '@/firebase/client-provider'
 
 export const metadata: Metadata = {
   title: 'SWECHA Healthcare',
@@ -21,7 +22,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-body antialiased bg-background text-foreground dark">
-        <ClientLayout>{children}</ClientLayout>
+        <FirebaseClientProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </FirebaseClientProvider>
         <Toaster />
       </body>
     </html>
