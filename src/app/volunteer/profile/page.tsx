@@ -19,6 +19,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const profileFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters."),
   username: z.string().min(2, "Username must be at least 2 characters."),
   phone: z.string().length(10, "Please enter a 10-digit phone number."),
   age: z.coerce.number().int().min(18, "You must be at least 18 years old.").max(100, "Please enter a valid age."),
@@ -42,6 +43,7 @@ export default function ProfilePage() {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
+      name: '',
       username: '',
       phone: '',
       age: undefined,
@@ -51,6 +53,7 @@ export default function ProfilePage() {
   useEffect(() => {
     if (userProfile) {
       form.reset({
+        name: userProfile.name || '',
         username: userProfile.username || '',
         phone: userProfile.phone || '',
         age: userProfile.age || undefined,
@@ -93,7 +96,7 @@ export default function ProfilePage() {
     );
   }
 
-  const initial = userProfile?.username ? userProfile.username.charAt(0).toUpperCase() : (user?.email?.charAt(0).toUpperCase() || 'V');
+  const initial = userProfile?.name ? userProfile.name.charAt(0).toUpperCase() : (user?.email?.charAt(0).toUpperCase() || 'V');
 
   return (
     <div className="flex-grow flex items-center justify-center py-12 px-4">
@@ -102,8 +105,8 @@ export default function ProfilePage() {
           <Avatar className="w-24 h-24 mb-4">
             <AvatarFallback className="text-4xl">{initial}</AvatarFallback>
           </Avatar>
-          <CardTitle className="text-2xl">{userProfile?.username || 'Volunteer'}</CardTitle>
-          <CardDescription>{user?.email}</CardDescription>
+          <CardTitle className="text-2xl">{userProfile?.name || 'Volunteer'}</CardTitle>
+          <CardDescription>{userProfile?.username ? `@${userProfile.username}` : user?.email}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4 text-center">
@@ -147,6 +150,19 @@ export default function ProfilePage() {
                 </DialogHeader>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name</FormLabel>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                     <FormField
                       control={form.control}
                       name="username"

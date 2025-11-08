@@ -23,6 +23,7 @@ import { doc } from 'firebase/firestore';
 import { FlippablePasswordInput } from "../ui/flippable-password-input";
 
 const formSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters."),
   username: z.string().min(2, "Username must be at least 2 characters."),
   email: z.string().email("Please enter a valid email address."),
   phone: z.string().length(10, "Please enter a 10-digit phone number."),
@@ -39,6 +40,7 @@ export function VolunteerSignupForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       username: "",
       email: "",
       phone: "",
@@ -63,6 +65,7 @@ export function VolunteerSignupForm() {
       if (user) {
         const userDocRef = doc(firestore, 'users', user.uid);
         const userData = {
+            name: values.name,
             username: values.username,
             email: values.email,
             phone: values.phone,
@@ -93,6 +96,19 @@ export function VolunteerSignupForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardContent className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Full Name <span className="text-destructive">*</span></FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your full name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="username"
