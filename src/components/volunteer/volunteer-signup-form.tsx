@@ -14,52 +14,58 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters."),
+  username: z.string().min(2, "Username must be at least 2 characters."),
   email: z.string().email("Please enter a valid email address."),
-  phone: z.string().min(10, "Phone number must be at least 10 digits."),
-  reason: z.string().min(10, "Please tell us why you'd like to volunteer."),
+  phone: z.string().length(10, "Please enter a 10-digit phone number."),
+  age: z.coerce.number().int().min(18, "You must be at least 18 years old.").max(100, "Please enter a valid age."),
+  password: z.string().min(6, "Password must be at least 6 characters."),
 });
 
 export function VolunteerSignupForm() {
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       phone: "",
-      reason: "",
+      age: undefined,
+      password: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     toast({
-      title: "Thank you for signing up!",
-      description: "We've received your information and will be in touch soon.",
+      title: "Account Created!",
+      description: "Your volunteer account has been created successfully.",
     });
-    form.reset();
+    router.push('/');
   }
 
   return (
-    <Card>
+    <Card className="w-full max-w-md">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl font-bold">Create Your Account</CardTitle>
+      </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <CardContent className="space-y-4 pt-6">
+          <CardContent className="space-y-4">
             <FormField
               control={form.control}
-              name="name"
+              name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+                  <FormLabel>Username <span className="text-destructive">*</span></FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} />
+                    <Input placeholder="Enter username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -70,9 +76,9 @@ export function VolunteerSignupForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address</FormLabel>
+                  <FormLabel>Email <span className="text-destructive">*</span></FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="you@example.com" {...field} />
+                    <Input type="email" placeholder="Enter email address" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -83,9 +89,9 @@ export function VolunteerSignupForm() {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel>Phone Number <span className="text-destructive">*</span></FormLabel>
                   <FormControl>
-                    <Input placeholder="(123) 456-7890" {...field} />
+                    <Input placeholder="Enter 10-digit phone number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -93,16 +99,25 @@ export function VolunteerSignupForm() {
             />
             <FormField
               control={form.control}
-              name="reason"
+              name="age"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Why do you want to volunteer?</FormLabel>
+                  <FormLabel>Age <span className="text-destructive">*</span></FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder="Tell us a bit about your motivation..."
-                      className="resize-y min-h-[120px]"
-                      {...field}
-                    />
+                    <Input type="number" placeholder="Enter age (18-100)" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password <span className="text-destructive">*</span></FormLabel>
+                  <FormControl>
+                    <Input type="password" placeholder="Enter password (min 6 characters)" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -111,7 +126,7 @@ export function VolunteerSignupForm() {
           </CardContent>
           <CardFooter>
             <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-              {form.formState.isSubmitting ? "Submitting..." : "Submit Application"}
+              {form.formState.isSubmitting ? "Signing Up..." : "Sign Up"}
             </Button>
           </CardFooter>
         </form>

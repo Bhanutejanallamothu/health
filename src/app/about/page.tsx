@@ -3,7 +3,8 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { VolunteerSignupForm } from "@/components/volunteer/volunteer-signup-form";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const teamMembers = [
   { name: "Dr. Jane Doe", role: "Chief Medical Officer", imageId: "team-member-1" },
@@ -75,11 +76,11 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold font-headline">Become a Volunteer</h2>
             <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-              Join our team of dedicated volunteers and make a real difference in the community. Fill out the form below to get started.
+              Ready to make a difference? Join our team of dedicated volunteers and help us bring vital healthcare to those in need.
             </p>
-          </div>
-          <div className="max-w-2xl mx-auto">
-            <VolunteerSignupForm />
+            <Button asChild className="mt-6">
+                <Link href="/volunteer/signup">Sign Up to Volunteer</Link>
+            </Button>
           </div>
         </section>
 
