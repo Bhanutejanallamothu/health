@@ -19,6 +19,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { FlippablePasswordInput } from "../ui/flippable-password-input";
 
 const formSchema = z.object({
   username: z.string().min(2, "Username must be at least 2 characters."),
@@ -39,12 +40,20 @@ export function VolunteerSignupForm() {
       username: "",
       email: "",
       phone: "",
-      age: "" as any,
+      age: '',
       password: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+     if (!auth) {
+        toast({
+            title: 'Auth service not available',
+            description: 'Please try again later.',
+            variant: 'destructive',
+        });
+        return;
+    }
     try {
       await createUserWithEmailAndPassword(auth, values.email, values.password);
       toast({
@@ -127,8 +136,8 @@ export function VolunteerSignupForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password <span className="text-destructive">*</span></FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="Enter password (min 6 characters)" {...field} />
+                   <FormControl>
+                    <FlippablePasswordInput {...field} placeholder="Enter password (min 6 characters)" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

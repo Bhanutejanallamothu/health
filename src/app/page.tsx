@@ -8,13 +8,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { Eye, EyeOff } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { useAuth, useUser } from '@/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FlippablePasswordInput } from '@/components/ui/flippable-password-input';
 
 export default function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isActive, setIsActive] = useState(false);
@@ -35,6 +34,14 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!auth) {
+        toast({
+            title: 'Auth service not available',
+            description: 'Please try again later.',
+            variant: 'destructive',
+        });
+        return;
+    }
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast({
@@ -91,30 +98,13 @@ export default function LoginPage() {
             </div>
             <div className="grid gap-2 relative text-left">
               <Label htmlFor="password">Password</Label>
-              <Input
+              <FlippablePasswordInput
                 id="password"
-                type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="absolute right-1 top-7 h-7 w-7"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
-                <span className="sr-only">
-                  {showPassword ? 'Hide password' : 'Show password'}
-                </span>
-              </Button>
             </div>
             <Button type="submit" className="w-full">
               Login
