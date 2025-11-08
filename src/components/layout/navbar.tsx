@@ -26,9 +26,11 @@ export function Navbar() {
     setIsClient(true);
   }, []);
 
-  const isLoginPage = useMemo(() => pathname === "/", [pathname]);
+  const isAuthPage = useMemo(() => {
+    return pathname === "/" || pathname === "/volunteer/signup";
+  }, [pathname]);
 
-  if (!isClient || isLoginPage) {
+  if (!isClient || isAuthPage) {
     return null;
   }
   
@@ -78,9 +80,9 @@ export function Navbar() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right">
-                  <SheetHeader>
-                    <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
-                    <SheetDescription className="sr-only">
+                  <SheetHeader className="sr-only">
+                    <SheetTitle>Mobile Navigation Menu</SheetTitle>
+                    <SheetDescription>
                       A list of links to navigate the application.
                     </SheetDescription>
                   </SheetHeader>
