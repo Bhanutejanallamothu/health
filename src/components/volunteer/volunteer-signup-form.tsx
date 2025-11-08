@@ -17,6 +17,8 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const formSchema = z.object({
   username: z.string().min(2, "Username must be at least 2 characters."),
@@ -29,6 +31,7 @@ const formSchema = z.object({
 export function VolunteerSignupForm() {
   const { toast } = useToast();
   const router = useRouter();
+  const auth = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,12 +45,20 @@ export function VolunteerSignupForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Account Created!",
-      description: "Your volunteer account has been created successfully.",
-    });
-    router.push('/');
+    try {
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      toast({
+        title: "Account Created!",
+        description: "Your volunteer account has been created successfully.",
+      });
+      router.push('/');
+    } catch (error: any) {
+      toast({
+        title: "Sign Up Failed",
+        description: error.message || "Could not create account.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -104,7 +115,7 @@ export function VolunteerSignupForm() {
                 <FormItem>
                   <FormLabel>Age <span className="text-destructive">*</span></FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="Enter age (18-100)" {...field} />
+                    <Input type="number" placeholder="Enter age (18-100)" value={field.value ?? ''} onChange={field.onChange} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -10,29 +10,54 @@ import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { Eye, EyeOff } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { useAuth, useUser } from '@/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+  const auth = useAuth();
+  const { user, isUserLoading } = useUser();
 
-  const handleLogin = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (!isUserLoading && user) {
+        if (user.email === 'admin@healthreach.org') {
+            router.push('/admin');
+        } else {
+            router.push('/volunteer/dashboard');
+        }
+    }
+  }, [user, isUserLoading, router]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'volunteer' && password === 'volunteer') {
-      router.push('/volunteer/dashboard');
-    } else if (username === 'admin' && password === 'admin') {
-        router.push('/admin');
-    } else {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       toast({
-        title: "Login Failed",
-        description: "Invalid username or password.",
-        variant: "destructive",
+        title: 'Login Successful',
+        description: 'Welcome back!',
+      });
+      // The useEffect will handle the redirect
+    } catch (error: any) {
+      toast({
+        title: 'Login Failed',
+        description: error.message || 'Invalid email or password.',
+        variant: 'destructive',
       });
     }
   };
+
+  if (isUserLoading || user) {
+      return (
+          <div className="flex items-center justify-center min-h-screen">
+              <p>Loading...</p>
+          </div>
+      );
+  }
 
   return (
     <div
@@ -42,70 +67,79 @@ export default function LoginPage() {
       )}
       onMouseEnter={() => setIsActive(true)}
     >
-        <div className="top"></div>
-        <div className="bottom"></div>
-        <div onClick={(e) => e.stopPropagation()} className="center flex flex-col items-center justify-center bg-card rounded-lg shadow-2xl p-8 w-[400px]">
-            <h2 className="text-3xl font-bold mb-6 text-card-foreground">
-                SWECHA Healthcare
-            </h2>
-            <form onSubmit={handleLogin} className="w-full">
-                <div className="grid gap-4">
-                    <div className="grid gap-2 text-left">
-                        <Label htmlFor="username">Username</Label>
-                        <Input 
-                            id="username" 
-                            type="text" 
-                            placeholder="Username" 
-                            required 
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </div>
-                    <div className="grid gap-2 relative text-left">
-                        <Label htmlFor="password">Password</Label>
-                        <Input
-                            id="password"
-                            type={showPassword ? 'text' : 'password'}
-                            placeholder="Password"
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            className="absolute right-1 top-7 h-7 w-7"
-                            onClick={() => setShowPassword(!showPassword)}
-                        >
-                            {showPassword ? (
-                            <EyeOff className="h-4 w-4" />
-                            ) : (
-                            <Eye className="h-4 w-4" />
-                            )}
-                            <span className="sr-only">
-                            {showPassword ? 'Hide password' : 'Show password'}
-                            </span>
-                        </Button>
-                    </div>
-                    <Button type="submit" className="w-full">
-                        Login
-                    </Button>
-                </div>
-            </form>
-            <div className="flex flex-col items-center justify-center gap-2 mt-4">
-                <p className="text-sm text-muted-foreground">
-                    <Link href="#" className="font-semibold text-primary hover:underline">
-                    Forgot password?
-                    </Link>
-                </p>
-                <p className="text-sm text-muted-foreground">
-                    New to volunteering?{" "}
-                    <Link href="/volunteer/signup" className="font-semibold text-primary hover:underline">
-                      Sign up
-                    </Link>
-                </p>
+      <div className="top"></div>
+      <div className="bottom"></div>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="center flex flex-col items-center justify-center bg-card rounded-lg shadow-2xl p-8 w-[400px]"
+      >
+        <h2 className="text-3xl font-bold mb-6 text-card-foreground">
+          SWECHA Healthcare
+        </h2>
+        <form onSubmit={handleLogin} className="w-full">
+          <div className="grid gap-4">
+            <div className="grid gap-2 text-left">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
+            <div className="grid gap-2 relative text-left">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute right-1 top-7 h-7 w-7"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+                <span className="sr-only">
+                  {showPassword ? 'Hide password' : 'Show password'}
+                </span>
+              </Button>
+            </div>
+            <Button type="submit" className="w-full">
+              Login
+            </Button>
+          </div>
+        </form>
+        <div className="flex flex-col items-center justify-center gap-2 mt-4">
+          <p className="text-sm text-muted-foreground">
+            <Link
+              href="#"
+              className="font-semibold text-primary hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </p>
+          <p className="text-sm text-muted-foreground">
+            New to volunteering?{' '}
+            <Link
+              href="/volunteer/signup"
+              className="font-semibold text-primary hover:underline"
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
