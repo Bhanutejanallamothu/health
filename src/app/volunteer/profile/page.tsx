@@ -1,26 +1,77 @@
 
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Edit, User, Mail, Phone, Calendar, Users, BarChart } from "lucide-react";
-import { useUser, useFirestore } from '@/firebase';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Edit, User, Mail, Phone, Calendar } from "lucide-react";
+import { useUser, useFirestore, useMemoFirebase } from '@/firebase';
 import { useDoc } from '@/firebase/firestore/use-doc';
-import { doc, DocumentData } from 'firebase/firestore';
-import { useMemo } from 'react';
+import { doc, DocumentData, updateDoc } from 'firebase/firestore';
+import { useMemo, useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
+
+const profileFormSchema = z.object({
+  username: z.string().min(2, "Username must be at least 2 characters."),
+  phone: z.string().length(10, "Please enter a 10-digit phone number."),
+  age: z.coerce.number().int().min(18, "You must be at least 18 years old.").max(100, "Please enter a valid age."),
+});
+
+type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export default function ProfilePage() {
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
+  const { toast } = useToast();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const userDocRef = useMemo(() => {
+  const userDocRef = useMemoFirebase(() => {
     if (!firestore || !user?.uid) return null;
     return doc(firestore, 'users', user.uid);
   }, [firestore, user?.uid]);
 
   const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
+
+  const form = useForm<ProfileFormValues>({
+    resolver: zodResolver(profileFormSchema),
+    defaultValues: {
+      username: '',
+      phone: '',
+      age: undefined,
+    }
+  });
+
+  useEffect(() => {
+    if (userProfile) {
+      form.reset({
+        username: userProfile.username || '',
+        phone: userProfile.phone || '',
+        age: userProfile.age || undefined,
+      });
+    }
+  }, [userProfile, form]);
+
+  async function onSubmit(values: ProfileFormValues) {
+    if (!userDocRef) {
+        toast({ title: "Error", description: "User reference not found.", variant: "destructive" });
+        return;
+    }
+    try {
+      await updateDoc(userDocRef, values);
+      toast({ title: "Success", description: "Your profile has been updated." });
+      setIsDialogOpen(false);
+    } catch (error: any) {
+      toast({ title: "Error", description: error.message || "Failed to update profile.", variant: "destructive" });
+    }
+  }
+
 
   if (isUserLoading || isProfileLoading) {
     return (
@@ -84,10 +135,69 @@ export default function ProfilePage() {
                     </div>
                 )}
             </div>
-
-            <Button className="w-full mt-4">
-                <Edit className="mr-2 h-4 w-4" /> Edit Profile
-            </Button>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button className="w-full mt-4">
+                    <Edit className="mr-2 h-4 w-4" /> Edit Profile
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Edit Your Profile</DialogTitle>
+                </DialogHeader>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <FormField
+                      control={form.control}
+                      name="username"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Username</FormLabel>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone</FormLabel>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="age"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Age</FormLabel>
+                          <FormControl>
+                            <Input type="number" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button type="button" variant="secondary">Cancel</Button>
+                      </DialogClose>
+                      <Button type="submit" disabled={form.formState.isSubmitting}>
+                        {form.formState.isSubmitting ? "Saving..." : "Save Changes"}
+                      </Button>
+                    </DialogFooter>
+                  </form>
+                </Form>
+              </DialogContent>
+            </Dialog>
         </CardContent>
       </Card>
     </div>
