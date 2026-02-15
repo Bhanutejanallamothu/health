@@ -31,7 +31,7 @@ const dashboardItems = [
   { icon: Users, label: "Counselling", number: 7, href: "/volunteer/counselling" },
   { icon: FlaskConical, label: "Lab", number: 8, href: "/volunteer/lab" },
   { icon: Shield, label: "Patient Support", number: 9, href: "/volunteer/patient-support" },
-  { icon: Ticket, label: "Token Generation", number: 10, href: "/404" },
+  { icon: Ticket, label: "Token Generation", number: 10, href: "/volunteer/token-generation" },
   { icon: Hourglass, label: "Patients Waiting", number: 11, href: "/404" },
   { icon: HelpingHand, label: "Doctor Assistance", number: 12, href: "/404" },
   { icon: List, label: "View Queues", number: 13, href: "/volunteer/view-queues" },
