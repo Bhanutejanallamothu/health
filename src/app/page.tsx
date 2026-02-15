@@ -108,7 +108,7 @@ export default function LoginPage() {
       <div className="bottom"></div>
       <div
         onClick={(e) => e.stopPropagation()}
-        className="center flex flex-col items-center justify-center bg-card rounded-lg shadow-2xl p-8 w-[400px]"
+        className="center w-[400px]"
       >
         <h2 className="text-3xl font-bold mb-6 text-card-foreground">
           SWECHA Healthcare

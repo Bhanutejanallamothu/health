@@ -1,91 +1,52 @@
-
-/**
- * @fileoverview Firestore Security Rules for the Medical Camp application.
- *
- * Core Philosophy:
- * This ruleset prioritizes data security by controlling access to the Firestore database.
- * It allows public read access to the `medicalCamps` collection, while requiring
- * authentication for writing to the `registrations` and `contactMessages` collections.
- *
- * Data Structure:
- * - /registrations/{registrationId}: Stores user registration data.
- * - /contactMessages/{contactMessageId}: Stores contact messages submitted by users.
- * - /medicalCamps/{medicalCampId}: Stores information about medical camps.
- * - /users/{userId}: Stores user profile information.
- *
- * Key Security Decisions:
- * - Public read access to the `medicalCamps` and `users` collections allows anyone to view upcoming events and user data for username lookup.
- * - Authentication is required to submit registrations and contact messages.
- * - Listing of `registrations` and `contactMessages` is disabled to prevent unauthorized data access.
- * - The rules do not enforce strict data validation for rapid prototyping.
- *
- * Denormalization for Authorization:
- * The rules rely on the assumption that write access to `registrations` and `contactMessages` should be restricted. For simplicity, these rules assume that only authenticated requests are allowed for `create`, `update`, and `delete`.
- *
- * Structural Segregation:
- * All collections are top-level, simplifying access control.
- */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
     /**
-     * @description Allows public read for username lookup, and only the user can write to their own profile.
-     * @path /users/{userId}
-     * @allow (get, list): if true
-     * @allow (create, update, delete): if request.auth.uid == userId
-     * @principle Public read access, restricted write access.
+     * USERS
+     * - Public read limited (optional)
+     * - No client-side writes
+     * - All writes via Express backend
      */
     match /users/{userId} {
       allow read: if true;
-      allow write: if request.auth.uid == userId;
+      allow write: if false;
     }
 
     /**
-     * @description Allows anyone to read medical camp information, but requires authentication for creating, updating, or deleting camps.
-     * @path /medicalCamps/{medicalCampId}
-     * @allow (get, list): if true
-     * @deny (create, update, delete): if false
-     * @principle Public read access with restricted write access.
+     * MEDICAL CAMPS
+     * - Public read access
+     * - Writes ONLY via backend (admin)
      */
     match /medicalCamps/{medicalCampId} {
       allow get, list: if true;
-      allow create, update, delete: if isSignedIn();
+      allow create, update, delete: if isAdmin();
     }
 
     /**
-     * @description Allows authenticated users to create registration documents, but restricts listing, updating, and deleting registrations.
-     * @path /registrations/{registrationId}
-     * @allow (create): if isSignedIn()
-     * @deny (get, list, update, delete): if false
-     * @principle Requires authentication for creating registrations.
+     * REGISTRATIONS
+     * - No client-side access
+     * - Backend only
      */
     match /registrations/{registrationId} {
-      allow get: if false;
-      allow list: if false;
-      allow create: if isSignedIn();
-      allow update: if false;
-      allow delete: if false;
+      allow read, write: if false;
     }
 
     /**
-     * @description Allows authenticated users to create contact messages, but restricts listing, updating, and deleting messages.
-     * @path /contactMessages/{contactMessageId}
-     * @allow (create): if isSignedIn()
-     * @deny (get, list, update, delete): if false
-     * @principle Requires authentication for creating contact messages.
+     * CONTACT MESSAGES
+     * - No client-side access
+     * - Backend only
      */
     match /contactMessages/{contactMessageId} {
-      allow get: if false;
-      allow list: if false;
-      allow create: if isSignedIn();
-      allow update: if false;
-      allow delete: if false;
-    }
-
-    // Helper function to check if the user is signed in
-    function isSignedIn() {
-      return request.auth != null;
+      allow read, write: if false;
     }
   }
 }
