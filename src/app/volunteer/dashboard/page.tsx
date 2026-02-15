@@ -35,7 +35,7 @@ const dashboardItems = [
   { icon: Hourglass, label: "Patients Waiting", number: 11, href: "/volunteer/patients-waiting" },
   { icon: HelpingHand, label: "Doctor Assistance", number: 12, href: "/volunteer/doctor-assistance" },
   { icon: List, label: "View Queues", number: 13, href: "/volunteer/view-queues" },
-  { icon: Truck, label: "Medicine Delivery", number: 14, href: "/404" },
+  { icon: Truck, label: "Medicine Delivery", number: 14, href: "/volunteer/medicine-delivery" },
   { icon: Utensils, label: "Food", number: 15, href: "/404" },
   { icon: User, label: "Profile", number: 16, href: "/volunteer/profile" },
 ];
