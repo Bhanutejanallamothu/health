@@ -1,3 +1,4 @@
+
 import { UserTable } from "@/components/admin/user-table";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -20,7 +21,7 @@ export default function AdminPage() {
       <header className="mb-8">
         <h1 className="text-4xl font-bold font-headline">Admin Dashboard</h1>
         <p className="text-muted-foreground mt-2">
-          Manage user registrations for medical camps.
+          Manage patient registrations for various departments.
         </p>
       </header>
       <Suspense fallback={<UserTableSkeleton />}>

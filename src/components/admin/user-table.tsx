@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -40,13 +41,13 @@ import { Search, Filter, MoreHorizontal, Trash2, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Registration } from "@/lib/types";
 import { registrations as initialRegistrations } from "@/lib/placeholder-data";
-import { camps } from "@/lib/placeholder-data";
+import { departments } from "@/lib/placeholder-data";
 import { useToast } from "@/hooks/use-toast";
 
 export function UserTable() {
   const [registrations, setRegistrations] = React.useState<Registration[]>(initialRegistrations);
   const [searchTerm, setSearchTerm] = React.useState("");
-  const [filterLocation, setFilterLocation] = React.useState("all");
+  const [filterDepartment, setFilterDepartment] = React.useState("all");
   const [viewingUser, setViewingUser] = React.useState<Registration | null>(null);
   const [deletingUser, setDeletingUser] = React.useState<Registration | null>(null);
   const { toast } = useToast();
@@ -54,13 +55,13 @@ export function UserTable() {
   const filteredRegistrations = React.useMemo(() => {
     return registrations
       .filter((user) =>
-        filterLocation === "all" ? true : user.campLocation === filterLocation
+        filterDepartment === "all" ? true : user.department === filterDepartment
       )
       .filter((user) =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.email.toLowerCase().includes(searchTerm.toLowerCase())
       );
-  }, [registrations, searchTerm, filterLocation]);
+  }, [registrations, searchTerm, filterDepartment]);
 
   const handleDelete = (userId: string) => {
     setRegistrations((prev) => prev.filter((user) => user.id !== userId));
@@ -88,23 +89,23 @@ export function UserTable() {
             <Button variant="outline" className="flex items-center gap-2">
               <Filter className="h-4 w-4" />
               <span>
-                Filter by Location
-                {filterLocation !== "all" && `: ${filterLocation}`}
+                Filter by Department
+                {filterDepartment !== "all" && `: ${filterDepartment}`}
               </span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Camp Location</DropdownMenuLabel>
+            <DropdownMenuLabel>Department</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onSelect={() => setFilterLocation("all")}>
-              All Locations
+            <DropdownMenuItem onSelect={() => setFilterDepartment("all")}>
+              All Departments
             </DropdownMenuItem>
-            {camps.map((camp) => (
+            {departments.map((dept) => (
               <DropdownMenuItem
-                key={camp.id}
-                onSelect={() => setFilterLocation(camp.location)}
+                key={dept.id}
+                onSelect={() => setFilterDepartment(dept.name)}
               >
-                {camp.location}
+                {dept.name}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -119,7 +120,7 @@ export function UserTable() {
               <TableHead className="hidden md:table-cell">Age</TableHead>
               <TableHead className="hidden lg:table-cell">Gender</TableHead>
               <TableHead className="hidden md:table-cell">Contact</TableHead>
-              <TableHead>Camp Location</TableHead>
+              <TableHead>Department</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -138,7 +139,7 @@ export function UserTable() {
                     <div>{user.email}</div>
                     <div>{user.phone}</div>
                   </TableCell>
-                  <TableCell>{user.campLocation}</TableCell>
+                  <TableCell>{user.department}</TableCell>
                   <TableCell className="text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -209,8 +210,8 @@ export function UserTable() {
                   <span>{viewingUser.address}</span>
                 </div>
                 <div className="grid grid-cols-[100px_1fr] items-center gap-4">
-                  <span className="text-muted-foreground">Camp</span>
-                  <span>{viewingUser.campLocation}</span>
+                  <span className="text-muted-foreground">Department</span>
+                  <span>{viewingUser.department}</span>
                 </div>
                 <div className="grid grid-cols-[100px_1fr] items-start gap-4">
                   <span className="text-muted-foreground">Condition</span>

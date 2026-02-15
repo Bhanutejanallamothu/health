@@ -39,13 +39,7 @@ export function Navbar() {
       <div className="flex h-16 items-center rounded-full border border-border/60 bg-background/60 p-2 px-8 shadow-lg backdrop-blur-lg gap-2">
         <div className="flex items-center gap-2 shrink-0">
             <Link href="/" className="flex items-center gap-2 shrink-0">
-              <Image
-                src="https://swecha.org/sites/default/files/2021-05/Swecha.png"
-                alt="Swecha Logo"
-                width={120}
-                height={38}
-                className="w-auto h-10"
-              />
+              <span className="font-bold text-xl">HMS</span>
             </Link>
         </div>
 

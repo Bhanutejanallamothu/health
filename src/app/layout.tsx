@@ -6,8 +6,8 @@ import { ClientLayout } from '@/components/layout/client-layout'
 import { FirebaseClientProvider } from '@/firebase/client-provider'
 
 export const metadata: Metadata = {
-  title: 'SWECHA Healthcare',
-  description: 'Community healthcare support',
+  title: 'Hospital Management System',
+  description: 'Efficient Hospital Management',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

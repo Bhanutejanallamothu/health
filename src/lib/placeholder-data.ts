@@ -1,20 +1,21 @@
-import type { Camp, Doctor, Patient, Registration } from '@/lib/types';
 
-export const camps: Camp[] = [
+import type { Department, Doctor, Patient, Registration } from '@/lib/types';
+
+export const departments: Department[] = [
   {
-    id: 'camp-1',
-    location: 'Greenwood Park',
-    date: 'October 15, 2024',
+    id: 'dept-1',
+    name: 'Cardiology',
+    description: 'Deals with disorders of the heart.',
   },
   {
-    id: 'camp-2',
-    location: 'Maple Community Center',
-    date: 'November 5, 2024',
+    id: 'dept-2',
+    name: 'Orthopedics',
+    description: 'Deals with the musculoskeletal system.',
   },
   {
-    id: 'camp-3',
-    location: 'Oceanview Library',
-    date: 'December 1, 2024',
+    id: 'dept-3',
+    name: 'General Medicine',
+    description: 'General medical services for adults.',
   },
 ];
 
@@ -27,7 +28,7 @@ export const registrations: Registration[] = [
     phone: '555-0101',
     email: 'alice.j@example.com',
     address: '123 Oak St, Greenwood',
-    campLocation: 'Greenwood Park',
+    department: 'Cardiology',
     medicalCondition: 'Asthma',
   },
   {
@@ -38,7 +39,7 @@ export const registrations: Registration[] = [
     phone: '555-0102',
     email: 'bob.w@example.com',
     address: '456 Pine St, Mapleton',
-    campLocation: 'Maple Community Center',
+    department: 'Orthopedics',
     medicalCondition: 'High blood pressure',
   },
   {
@@ -49,7 +50,7 @@ export const registrations: Registration[] = [
     phone: '555-0103',
     email: 'charlie.b@example.com',
     address: '789 Birch St, Oceanview',
-    campLocation: 'Oceanview Library',
+    department: 'General Medicine',
     medicalCondition: 'None',
   },
   {
@@ -60,7 +61,7 @@ export const registrations: Registration[] = [
     phone: '555-0104',
     email: 'diana.p@example.com',
     address: '101 Maple Ave, Greenwood',
-    campLocation: 'Greenwood Park',
+    department: 'Cardiology',
     medicalCondition: 'Allergies',
   },
     {
@@ -71,7 +72,7 @@ export const registrations: Registration[] = [
     phone: '555-0105',
     email: 'ed.n@example.com',
     address: '212 Riddle Rd, Mapleton',
-    campLocation: 'Maple Community Center',
+    department: 'General Medicine',
     medicalCondition: 'Diabetes Type 2',
   },
 ];

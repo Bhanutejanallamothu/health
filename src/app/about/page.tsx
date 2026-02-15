@@ -18,9 +18,9 @@ export default function AboutPage() {
   return (
     <div className="container py-12 md:py-20">
       <header className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold font-headline">About HealthReach</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-headline">About Our Hospital</h1>
         <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">
-          Learn about our commitment to bringing healthcare to every corner of our community.
+          Learn about our commitment to providing world-class healthcare.
         </p>
       </header>
 
@@ -42,7 +42,7 @@ export default function AboutPage() {
             <div className="p-8 md:p-12">
               <h2 className="text-3xl font-bold font-headline mb-4">Our Mission</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Our mission is to provide accessible, high-quality healthcare to underserved communities through mobile medical camps. We believe that everyone deserves access to medical care, regardless of their location or financial situation. We strive to foster healthier communities by offering preventative care, health education, and basic medical treatment.
+                Our mission is to provide accessible, high-quality healthcare to our community. We believe that everyone deserves access to the best medical care. We strive to foster a healthier community by offering preventative care, health education, and advanced medical treatment.
               </p>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold font-headline">Become a Volunteer</h2>
             <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-              Ready to make a difference? Join our team of dedicated volunteers and help us bring vital healthcare to those in need.
+              Ready to make a difference? Join our team of dedicated volunteers and help us provide vital support to patients and staff.
             </p>
             <Button asChild className="mt-6">
                 <Link href="/volunteer/signup">Sign Up to Volunteer</Link>
@@ -90,7 +90,7 @@ export default function AboutPage() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto text-center">
-              HealthReach was founded in 2020 with a simple goal: to bridge the healthcare gap in remote and low-income areas. What started as a small group of volunteer doctors and nurses has grown into a well-organized non-profit that has served thousands of individuals. We partner with local community leaders to ensure our camps are effective and culturally sensitive, providing care that truly makes a difference.
+              Our hospital was founded with the goal of providing exceptional medical services. What started as a small clinic has grown into a leading healthcare institution serving thousands of patients. We partner with community leaders to ensure our services are effective and culturally sensitive, providing care that truly makes a difference.
             </p>
           </CardContent>
         </Card>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { z } from "zod";
@@ -25,7 +26,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { camps } from "@/lib/placeholder-data";
+import { departments } from "@/lib/placeholder-data";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -34,7 +35,7 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits."),
   email: z.string().email("Please enter a valid email address."),
   address: z.string().min(5, "Please enter a valid address."),
-  campLocation: z.string({ required_error: "Please select a camp location." }),
+  department: z.string({ required_error: "Please select a department." }),
   medicalCondition: z.string().optional(),
 });
 
@@ -57,7 +58,7 @@ export function RegistrationForm() {
     // In a real app, you would send this data to a server.
     console.log(values);
     toast({
-      title: "Registration Successful!",
+      title: "Appointment Booked!",
       description: "We've received your registration and look forward to seeing you.",
       variant: "default",
     });
@@ -166,20 +167,20 @@ export function RegistrationForm() {
 
             <FormField
               control={form.control}
-              name="campLocation"
+              name="department"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Camp Location</FormLabel>
+                  <FormLabel>Department</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a camp" />
+                        <SelectValue placeholder="Select a department" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {camps.map((camp) => (
-                        <SelectItem key={camp.id} value={camp.location}>
-                          {camp.location} ({camp.date})
+                      {departments.map((dept) => (
+                        <SelectItem key={dept.id} value={dept.name}>
+                          {dept.name}
                         </SelectItem>
                       ))}
                     </SelectContent>

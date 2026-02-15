@@ -111,7 +111,7 @@ export default function LoginPage() {
         className="center w-[400px]"
       >
         <h2 className="text-3xl font-bold mb-6 text-card-foreground">
-          SWECHA Healthcare
+          Hospital Management System
         </h2>
         <form onSubmit={handleLogin} className="w-full">
           <div className="grid gap-4">

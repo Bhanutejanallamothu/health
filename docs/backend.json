@@ -5,7 +5,7 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Registration",
       "type": "object",
-      "description": "Represents a user's registration for a medical camp.",
+      "description": "Represents a patient's registration for an appointment.",
       "properties": {
         "id": {
           "type": "string",
@@ -36,9 +36,9 @@
           "type": "string",
           "description": "The address of the registrant."
         },
-        "campLocation": {
+        "department": {
           "type": "string",
-          "description": "The location of the medical camp the registrant is signing up for."
+          "description": "The hospital department for the appointment."
         },
         "medicalCondition": {
           "type": "string",
@@ -53,7 +53,7 @@
         "phone",
         "email",
         "address",
-        "campLocation",
+        "department",
         "medicalCondition"
       ]
     },
@@ -93,34 +93,28 @@
         "message"
       ]
     },
-    "MedicalCamp": {
+    "Department": {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "MedicalCamp",
+      "title": "Department",
       "type": "object",
-      "description": "Represents an upcoming medical camp event.",
+      "description": "Represents a hospital department.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the medical camp."
+          "description": "Unique identifier for the department."
         },
-        "date": {
+        "name": {
           "type": "string",
-          "description": "The date of the medical camp.",
-          "format": "date-time"
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the medical camp."
+          "description": "The name of the department."
         },
         "description": {
           "type": "string",
-          "description": "A brief description of the medical camp."
+          "description": "A brief description of the department."
         }
       },
       "required": [
         "id",
-        "date",
-        "location"
+        "name"
       ]
     },
     "UserProfile": {
@@ -194,7 +188,7 @@
           "schema": {
             "$ref": "#/entities/Registration"
           },
-          "description": "Stores user registration data for medical camps.",
+          "description": "Stores patient registration data for appointments.",
           "params": [
             {
               "name": "registrationId",
@@ -220,22 +214,22 @@
         }
       },
       {
-        "path": "/medicalCamps/{medicalCampId}",
+        "path": "/departments/{departmentId}",
         "definition": {
-          "entityName": "MedicalCamp",
+          "entityName": "Department",
           "schema": {
-            "$ref": "#/entities/MedicalCamp"
+            "$ref": "#/entities/Department"
           },
-          "description": "Stores information about upcoming medical camps.",
+          "description": "Stores information about hospital departments.",
           "params": [
             {
-              "name": "medicalCampId",
-              "description": "Unique identifier for the medical camp document."
+              "name": "departmentId",
+              "description": "Unique identifier for the department document."
             }
           ]
         }
       }
     ],
-    "reasoning": "The Firestore structure is designed to store data related to medical camps, user registrations, and contact messages. It follows a flat structure with dedicated collections for each entity. This approach simplifies security rules and queries. The `registrations` collection stores user registration data. The `contactMessages` collection stores messages submitted via the contact form. The `medicalCamps` collection stores data about upcoming medical camps. This structure ensures authorization independence because there are no hierarchical dependencies requiring `get()` calls in the security rules. Each collection is independent and secured based on its own data and potentially user authentication (`request.auth.uid` if authentication is required, though in this case, write access to the collections might be limited to authenticated admins).  Since there are no role based access controls the rules will need to be simple."
+    "reasoning": "The Firestore structure is designed to store data related to hospital departments, patient registrations, and contact messages. It follows a flat structure with dedicated collections for each entity. This approach simplifies security rules and queries. The `registrations` collection stores user registration data for appointments. The `contactMessages` collection stores messages submitted via the contact form. The `departments` collection stores data about the hospital departments. This structure ensures authorization independence because there are no hierarchical dependencies requiring `get()` calls in the security rules. Each collection is independent and secured based on its own data and potentially user authentication (`request.auth.uid` if authentication is required)."
   }
 }

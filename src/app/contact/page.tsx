@@ -1,3 +1,4 @@
+
 import { ContactForm } from "@/components/contact/contact-form";
 import { Mail, Phone, MapPin } from "lucide-react";
 
@@ -21,7 +22,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold">Our Office</h3>
-                <p className="text-muted-foreground">123 Health Ave, Wellness City, 12345</p>
+                <p className="text-muted-foreground">123 Health Drive, Med-City, 12345</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -30,7 +31,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold">Email Us</h3>
-                <p className="text-muted-foreground">contact@healthreach.org</p>
+                <p className="text-muted-foreground">contact@hospital.com</p>
               </div>
             </div>
             <div className="flex items-start gap-4">

@@ -1,7 +1,8 @@
-export type Camp = {
+
+export type Department = {
   id: string;
-  location: string;
-  date: string;
+  name: string;
+  description: string;
 };
 
 export type Registration = {
@@ -12,7 +13,7 @@ export type Registration = {
   phone: string;
   email: string;
   address: string;
-  campLocation: string;
+  department: string;
   medicalCondition: string;
 };
 
