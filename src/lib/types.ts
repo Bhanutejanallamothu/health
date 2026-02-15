@@ -23,6 +23,9 @@ export type Patient = {
   age: number;
   gender: 'Male' | 'Female';
   area: string;
+  tokenNumber?: string;
+  status?: 'Waiting for Doctor' | 'With Doctor' | 'Waiting for Lab' | 'Waiting for Pharmacy' | 'Counselling' | 'Done';
+  assignedDoctorId?: string;
 };
 
 export type Doctor = {
