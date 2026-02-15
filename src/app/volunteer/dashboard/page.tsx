@@ -33,7 +33,7 @@ const dashboardItems = [
   { icon: Shield, label: "Patient Support", number: 9, href: "/volunteer/patient-support" },
   { icon: Ticket, label: "Token Generation", number: 10, href: "/volunteer/token-generation" },
   { icon: Hourglass, label: "Patients Waiting", number: 11, href: "/volunteer/patients-waiting" },
-  { icon: HelpingHand, label: "Doctor Assistance", number: 12, href: "/404" },
+  { icon: HelpingHand, label: "Doctor Assistance", number: 12, href: "/volunteer/doctor-assistance" },
   { icon: List, label: "View Queues", number: 13, href: "/volunteer/view-queues" },
   { icon: Truck, label: "Medicine Delivery", number: 14, href: "/404" },
   { icon: Utensils, label: "Food", number: 15, href: "/404" },
