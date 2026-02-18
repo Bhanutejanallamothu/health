@@ -1,62 +1,47 @@
-🩺 Health – Digital Health Management Platform
+🩺 Hospital Management System – Digital Health Management Platform
 
-Health is a modern, responsive web application designed to simplify how users access, manage, and interact with health-related information.
-The platform provides a centralized, secure, and scalable foundation for building real-world healthcare solutions.
+A modern, responsive web application designed to simplify how users access, manage, and interact with health-related information. The platform provides a centralized, secure, and scalable foundation for building real-world healthcare solutions.
 
 It focuses on accessibility, reliability, and performance, making it suitable for both academic projects and production-ready health platforms.
 
-✨ Features
+### Overview of App Features
 
-⚡ Built with Next.js (App Router)
+**Core Platform & Technology:**
+*   **Modern Web Stack**: Built with **Next.js (App Router)** and **React** for a performant, server-driven UI, and written in **TypeScript** for robust, type-safe code.
+*   **Responsive UI/UX**: Utilizes **Tailwind CSS** and **ShadCN UI** components for a polished, accessible, and fully responsive design that works seamlessly across desktops and mobile devices.
+*   **Backend Services**: Integrated with **Firebase** for backend-as-a-service, leveraging **Firebase Authentication** for secure user management and **Firestore** for a scalable, real-time database.
 
-🧠 TypeScript for reliable, type-safe code
+**Key Functional Modules:**
 
-🎨 Tailwind CSS for fast and responsive UI design
+1.  **Dual-Role Authentication System**:
+    *   Provides distinct user roles: **Admin** and **Volunteer**.
+    *   Features secure user login (by email or username) and a separate signup flow for new volunteers.
+    *   Role-based redirects ensure users land on the correct dashboard after login.
 
-🔥 Firebase integration for backend services
+2.  **Volunteer Dashboard & Workflow Management**:
+    *   A centralized dashboard serves as the main hub for all volunteer activities, providing quick access to various modules.
+    *   **Patient Registration**: A comprehensive form to register new patients or retrieve and update the details of existing ones using a unique "Book Number."
+    *   **Vitals & Prescription**: Dedicated forms for recording patient vitals (BP, pulse, etc.) and for doctors to create detailed prescriptions with automated quantity calculation.
+    *   **Queue & Status Management**: Includes modules for assigning patients to doctors, viewing patient queues, and tracking a patient's status throughout their visit (e.g., "Waiting for Doctor," "In Lab," "Awaiting Pharmacy").
+    *   **Service & Support Forms**: Specialized forms for requesting lab tests, doctor assistance, counselling sessions, and managing medicine delivery.
+    *   **Profile Management**: Volunteers can view and edit their personal profile information, which is securely stored and updated in Firestore.
 
-🔐 Firestore security rules included
+3.  **Admin Dashboard**:
+    *   An administrative interface for managing core hospital data.
+    *   Features a searchable and filterable table of all patient registrations.
+    *   Admins can view detailed registration information and perform management actions like deleting records.
 
-☁️ Deployment-ready for Vercel and Firebase Hosting
+4.  **Public-Facing Portal**:
+    *   **Appointment Booking**: An intuitive public form allows new patients to register for appointments with different hospital departments.
+    *   **Informational Pages**: Includes an "About" page detailing the hospital's mission and team, and a "Contact" page for inquiries.
 
-🧩 Modular and reusable component structure
+**Noteworthy UI/UX Enhancements:**
+*   **Engaging Animations**: The login/signup pages feature a dynamic animated background, and the application includes a unique animated logout button for a polished user experience.
+*   **Real-time Feedback**: The system uses toast notifications for immediate user feedback on actions like form submissions and login events.
+*   **Optimistic UI**: Loading skeletons and states are used throughout the application to improve perceived performance while data is being fetched from the backend.
 
-🩺 Application Overview
+This feature set makes it a robust and scalable foundation for a real-world hospital management platform.
 
-Healthcare systems often suffer from fragmented data, poor user experience, and limited accessibility.
-Health addresses this gap by offering a unified digital platform where users can interact with health services through a single, user-friendly interface.
-
-The application is designed to support:
-
-Personal health record management
-
-Secure user authentication
-
-Organized access to health-related data
-
-Scalable backend support for future healthcare services
-
-Its modular architecture allows it to evolve into a complete healthcare ecosystem such as a hospital portal, telemedicine platform, or health analytics dashboard.
-
-🎯 Objectives
-
-Provide a clean and intuitive interface for health-related applications
-
-Ensure secure handling of user and health data
-
-Offer a scalable foundation for advanced healthcare features
-
-Support cloud-based deployment for real-world usage
-
-🧠 Key Highlights
-
-User-centric design focused on simplicity and clarity
-
-Secure backend integration for data storage and access control
-
-Modular architecture supporting future feature expansion
-
-Optimized performance across devices and screen sizes
 
 🗂️ Project Structure
 health/
