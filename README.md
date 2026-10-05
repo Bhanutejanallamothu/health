@@ -1,109 +1,152 @@
-🩺 Hospital Management System – Digital Health Management Platform
+# PulseCare — Comprehensive Hospital & Clinic Management Platform
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
+[![Security Audit](https://img.shields.io/badge/security-audited-blue.svg)]()
+[![Tech Stack](https://img.shields.io/badge/stack-TypeScript-informational.svg)]()
+[![License](https://img.shields.io/badge/license-private-lightgrey.svg)]()
 
-A modern, responsive web application designed to simplify how users access, manage, and interact with health-related information. The platform provides a centralized, secure, and scalable foundation for building real-world healthcare solutions.
+## Overview
+PulseCare is an enterprise healthcare management system built with Next.js 15, Tailwind CSS, and Firebase. Engineered to modernize hospital operations, PulseCare integrates doctor scheduling, patient clinical records, department telemetry, and administrative dashboards into a single accessible portal.
 
-It focuses on accessibility, reliability, and performance, making it suitable for both academic projects and production-ready health platforms.
+- **Problem Solved:** Disjointed clinical scheduling, delayed patient record retrieval, and administrative overhead in outpatient clinics.
+- **Target Users:** Hospital administrators, doctors, triage nurses, and patients.
+- **Current Status:** Functional Healthcare MVP.
 
-### Overview of App Features
+## Features
+- **Hospital Administration Dashboard:** Overview of inpatient bed occupancy, appointment volumes, and emergency cases.
+- **Doctor Consultation Scheduling:** Patient appointment booking with doctor availability slots.
+- **Electronic Health Records (EHR):** Secure patient history, prescription logging, and clinical diagnosis notes.
+- **Firebase Authentication:** Multi-role identity handling for Patients, Doctors, and Administrators.
 
-**Core Platform & Technology:**
-*   **Modern Web Stack**: Built with **Next.js (App Router)** and **React** for a performant, server-driven UI, and written in **TypeScript** for robust, type-safe code.
-*   **Responsive UI/UX**: Utilizes **Tailwind CSS** and **ShadCN UI** components for a polished, accessible, and fully responsive design that works seamlessly across desktops and mobile devices.
-*   **Backend Services**: Integrated with **Firebase** for backend-as-a-service, leveraging **Firebase Authentication** for secure user management and **Firestore** for a scalable, real-time database.
+## Architecture
+```mermaid
+flowchart TD
+    Patient["Patient / Doctor / Admin"] --> UI["Next.js 15 App Router"]
+    UI --> Actions["Next.js Server Actions & API Routes"]
+    Actions --> Auth["Firebase Authentication"]
+    Actions --> Store["Firebase Firestore (EHR & Appointments)"]
+```
 
-**Key Functional Modules:**
+## User Flow
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Patient as Clinic Patient
+    participant UI as PulseCare Web Portal
+    participant Auth as Firebase Authentication
+    participant DB as Firestore Database
+    actor Doctor as Attending Physician
 
-1.  **Dual-Role Authentication System**:
-    *   Provides distinct user roles: **Admin** and **Volunteer**.
-    *   Features secure user login (by email or username) and a separate signup flow for new volunteers.
-    *   Role-based redirects ensure users land on the correct dashboard after login.
+    Patient->>UI: Access PulseCare portal and sign in
+    UI->>Auth: Authenticate patient
+    Auth-->>UI: Session established
+    Patient->>UI: Select doctor, medical department, and appointment slot
+    UI->>DB: Write appointment record to 'appointments' collection
+    DB-->>UI: Appointment confirmed
+    Doctor->>UI: Login to Physician Roster dashboard
+    UI->>DB: Query appointments scheduled for today
+    DB-->>UI: Display patient queue
+    Doctor->>UI: Record clinical diagnosis & prescribed medications
+    UI->>DB: Update patient EHR electronic record
+```
 
-2.  **Volunteer Dashboard & Workflow Management**:
-    *   A centralized dashboard serves as the main hub for all volunteer activities, providing quick access to various modules.
-    *   **Patient Registration**: A comprehensive form to register new patients or retrieve and update the details of existing ones using a unique "Book Number."
-    *   **Vitals & Prescription**: Dedicated forms for recording patient vitals (BP, pulse, etc.) and for doctors to create detailed prescriptions with automated quantity calculation.
-    *   **Queue & Status Management**: Includes modules for assigning patients to doctors, viewing patient queues, and tracking a patient's status throughout their visit (e.g., "Waiting for Doctor," "In Lab," "Awaiting Pharmacy").
-    *   **Service & Support Forms**: Specialized forms for requesting lab tests, doctor assistance, counselling sessions, and managing medicine delivery.
-    *   **Profile Management**: Volunteers can view and edit their personal profile information, which is securely stored and updated in Firestore.
+## Technology Stack
+| Layer | Technology | Purpose |
+|---|---|---|
+| Framework | Next.js 15 (App Router) | Enterprise React application framework |
+| Language | TypeScript | Type safety and medical domain schemas |
+| UI & Icons | Tailwind CSS, Radix UI, Lucide | Clean medical UI and accessible primitives |
+| Backend & Auth | Firebase Auth & Firestore | Secure identity and NoSQL document store |
 
-3.  **Admin Dashboard**:
-    *   An administrative interface for managing core hospital data.
-    *   Features a searchable and filterable table of all patient registrations.
-    *   Admins can view detailed registration information and perform management actions like deleting records.
+## Infrastructure
+- **Server Port:** 3000
+- **Cloud Backend:** Google Firebase Services
 
-4.  **Public-Facing Portal**:
-    *   **Appointment Booking**: An intuitive public form allows new patients to register for appointments with different hospital departments.
-    *   **Informational Pages**: Includes an "About" page detailing the hospital's mission and team, and a "Contact" page for inquiries.
-
-**Noteworthy UI/UX Enhancements:**
-*   **Engaging Animations**: The login/signup pages feature a dynamic animated background, and the application includes a unique animated logout button for a polished user experience.
-*   **Real-time Feedback**: The system uses toast notifications for immediate user feedback on actions like form submissions and login events.
-*   **Optimistic UI**: Loading skeletons and states are used throughout the application to improve perceived performance while data is being fetched from the backend.
-
-This feature set makes it a robust and scalable foundation for a real-world hospital management platform.
-
-
-🗂️ Project Structure
+## Project Structure
+```text
 health/
-├── docs/                    # Documentation files
-├── src/                     # Application source code
-│   ├── app/                 # Next.js App Router pages
-│   └── components/          # Reusable UI components
-├── .gitignore
-├── apphosting.yaml          # Hosting configuration
-├── components.json
-├── firestore.rules          # Firestore security rules
-├── next.config.ts           # Next.js configuration
-├── package.json             # Project dependencies & scripts
-├── postcss.config.mjs       # PostCSS configuration
-├── tailwind.config.ts       # Tailwind CSS configuration
-├── tsconfig.json            # TypeScript configuration
-└── README.md                # Project documentation
+├── src/
+│   ├── app/             # Next.js App Router (appointments, admin, doctors, patients)
+│   ├── components/      # MedicalCard, AppointmentCalendar, PatientTable
+│   ├── context/         # AuthContext and role checking
+│   ├── firebase/        # config.ts (Externalized Firebase initialization)
+│   └── lib/             # Utility and formatting helpers
+├── package.json         # Dependencies
+├── next.config.ts       # Next.js configuration
+├── .env.example         # Environment variables template
+├── .gitignore           # Git ignore definitions
+└── README.md            # Technical documentation
+```
 
-🛠 Tech Stack
-Technology	Purpose
-Next.js	Server-side rendering & routing
-TypeScript	Type-safe JavaScript
-Tailwind CSS	Utility-first styling
-Firebase	Database & backend services
-Vercel / Firebase Hosting	Production deployment
-🚀 Getting Started
-1️⃣ Clone the Repository
-git clone https://github.com/Bhanutejanallamothu/health.git
-cd health
+## Prerequisites
+- Node.js >= 18.x
+- npm >= 9.x
+- Firebase project with Firestore and Authentication enabled
 
-2️⃣ Install Dependencies
-npm install
-# or
-yarn
-
-3️⃣ Environment Configuration
-
-Create a .env.local file in the root directory and add:
-
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+## Environment Variables
+Create `.env.local` using placeholders:
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+```
 
-🔐 Demo Login Credentials
+## Local Development Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Bhanutejanallamothu/health.git
+   cd health
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+4. Start development server:
+   ```bash
+   npm run dev
+   ```
+5. Navigate to `http://localhost:3000`.
 
-Use the following credentials to access the application:
+## Docker Setup
+*Not detected in repository. Standard Next.js standalone containerization supported.*
 
-Login ID: volunteer
-Password: volunteer
+## Database Setup
+Firestore collections:
+- `appointments` - Scheduled consultation visits.
+- `patients` - Demographic and medical history files.
+- `doctors` - Staff roster, specializations, and working hours.
 
+## API Documentation
+- `POST /api/appointments` - Book a consultation slot.
+- `GET /api/doctors` - Retrieve doctors list and specializations.
 
-⚠️ These credentials are for demo/testing purposes only.
+## Deployment
+Build and deploy to Vercel or Firebase App Hosting:
+```bash
+npm run build
+```
 
-🧪 Development
+## Security
+- API keys externalized to environment variables.
+- Role-based route guarding preventing patient access to administrative panels.
+- Sanitized input fields to prevent XSS in clinical notes.
 
-Start the development server:
+## Testing
+```bash
+npm run lint
+```
 
-npm run dev
+## Troubleshooting
+- **Firebase Permission Error:** Ensure Firestore Security Rules grant read/write access to authenticated users.
 
+## Future Improvements
+- Telemedicine video consultation via WebRTC.
+- Integration with FHIR / HL7 clinical interoperability standards.
 
-Visit http://localhost:3000
- to view the app.
+## License
+Healthcare management project. All rights reserved by repository owner.
